@@ -12,7 +12,7 @@ const Incomes = () => {
         <h1>Incomes</h1>
         <div className="income-content">
           <div className="form-container">
-            <Form />
+            <Form /> 
           </div>
           <div className="incomes"></div>
         </div>
