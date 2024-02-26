@@ -108,7 +108,7 @@ const IncomeItem = ({
               color={"#fff"}
               iColor={"#fff"}
               hColor={"var(--color-green)"}
-              // onClick={() => handleDelete(id)}
+              onClick={() => deleteItem(id)}
             />
           </div>
         </div>
