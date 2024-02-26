@@ -1,4 +1,4 @@
-import { createGlobalStyle } from 'styled-components';
+import { createGlobalStyle } from "styled-components";
 
 export const GlobalStyle = createGlobalStyle`
     *{
@@ -15,7 +15,8 @@ export const GlobalStyle = createGlobalStyle`
         --color-green: #42AD00;
         --color-grey: #aaa;
         --color-accent: #F56692;
-        --color-delete: #FF0000;    
+        --color-delete: #FF0000;
+        --shadow-style: 'box-shadow: 0px 1px 15px rgba(0,0,0,0.06)'
     }
 
     body{
@@ -23,5 +24,9 @@ export const GlobalStyle = createGlobalStyle`
         font-size: clamp(1rem, 1.5vw, 1.2rem)
         overflow: hidden;
         color: rgba(34,34,96,.6)
+    }
+
+    h1,h2,h3,h4,h5,h6{
+        color: var(--primary-color)
     }
 `;

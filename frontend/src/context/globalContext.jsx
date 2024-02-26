@@ -17,6 +17,7 @@ export const GlobalProvider = ({ children }) => {
       .catch((error) => {
         setError(error.response.data.message);
       });
+    getIncome();
   };
 
   // retrieving incomes from the db
@@ -25,12 +26,32 @@ export const GlobalProvider = ({ children }) => {
     setIncomes(response.data);
   };
 
+  // deleting incomes from db
+  const deleteIncome = async (id) => {
+    const res = await axios.delete(`${BASE_URL}delete-income/${id}`);
+    getIncome();
+  };
+
+  // getting total of all incomes added
+  const totalIncome = () => {
+    let totalIncome = 0;
+    incomes.forEach((income) => {
+      totalIncome += income.amount;
+    });
+
+    return totalIncome;
+  };
+
+  console.log(totalIncome());
+
   return (
     <GlobalContext.Provider
       value={{
         addIncome,
         getIncome,
         incomes,
+        deleteIncome,
+        totalIncome
       }}
     >
       {children}
