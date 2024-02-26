@@ -127,7 +127,7 @@ const FormStyled = styled.form`
     border: 2px solid #fff;
     background: transparent;
     resize: none;
-    box-shadow: 0px 1px 15px rgba(0, 0, 0, 0.06);
+    box-shadow: var(--shadow-style);
     color: rgba(34, 34, 96, 0.9);
     &::placeholder {
       color: rgba(34, 34, 96, 0.4);
@@ -151,7 +151,7 @@ const FormStyled = styled.form`
   }
   .submit-btn {
     button {
-      box-shadow: 0px 1px 15px rgba(0, 0, 0, 0.06);
+      box-shadow: var(--shadow-style);
       &:hover {
         background: var(--color-green) !important;
       }

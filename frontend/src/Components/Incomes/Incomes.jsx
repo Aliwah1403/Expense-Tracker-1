@@ -60,7 +60,7 @@ const IncomesStyled = styled.div`
     align-items: center;
     background: #fcf6f9;
     border: 2px solid #ffffff;
-    box-shadow: 0px 1px 15px rgba(0,0,0,0.06)
+    box-shadow: var(--shadow-style);
     border-radius: 20px;
     padding: 1rem;
     margin: 1rem 0;
