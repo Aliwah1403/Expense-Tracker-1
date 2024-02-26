@@ -17,6 +17,7 @@ export const GlobalProvider = ({ children }) => {
       .catch((error) => {
         setError(error.response.data.message);
       });
+    getIncome();
   };
 
   // retrieving incomes from the db
@@ -28,6 +29,7 @@ export const GlobalProvider = ({ children }) => {
   // deleting incomes from db
   const deleteIncome = async (id) => {
     const res = await axios.delete(`${BASE_URL}delete-income/${id}`);
+    getIncome();
   };
 
   return (
