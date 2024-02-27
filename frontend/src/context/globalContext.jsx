@@ -42,7 +42,37 @@ export const GlobalProvider = ({ children }) => {
     return totalIncome;
   };
 
-  console.log(totalIncome());
+  // adding expenses to db
+  const addExpense = async (expense) => {
+    const response = await axios
+      .post(`${BASE_URL}add-expense`, expense)
+      .catch((error) => {
+        setError(error.response.data.message);
+      });
+    getExpense();
+  };
+
+  // retrieving expenses from the db
+  const getExpense = async () => {
+    const response = await axios.get(`${BASE_URL}get-expenses`);
+    setExpenses(response.data);
+  };
+
+  // deleting expenses from db
+  const deleteExpense = async (id) => {
+    const res = await axios.delete(`${BASE_URL}delete-expense/${id}`);
+    getExpense();
+  };
+
+  // getting total of all expenses added
+  const totalExpense = () => {
+    let totalExpense = 0;
+    expenses.forEach((expense) => {
+      totalExpense += expense.amount;
+    });
+
+    return totalExpense;
+  };
 
   return (
     <GlobalContext.Provider
@@ -51,7 +81,12 @@ export const GlobalProvider = ({ children }) => {
         getIncome,
         incomes,
         deleteIncome,
-        totalIncome
+        totalIncome,
+        addExpense,
+        getExpense,
+        expenses,
+        deleteExpense,
+        totalExpense,
       }}
     >
       {children}
