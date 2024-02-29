@@ -28,7 +28,7 @@ const Incomes = () => {
           </div>
           <div className="incomes">
             {incomes.map((income) => {
-              const { _id, title, amount, date, category, description } =
+              const { _id, title, amount, date, category, description, type } =
                 income;
               return (
                 <IncomeItem
@@ -38,6 +38,7 @@ const Incomes = () => {
                   description={description}
                   amount={amount}
                   date={date}
+                  type={type}
                   category={category}
                   indicatorColor="var(--color-green)"
                   deleteItem={deleteIncome}
@@ -65,8 +66,8 @@ const IncomesStyled = styled.div`
     padding: 1rem;
     margin: 1rem 0;
     font-size: 2rem;
-    gap: .5rem;
-    span{
+    gap: 0.5rem;
+    span {
       font-size: 2.5rem;
       font-weight: 800;
       color: var(--color-green);
