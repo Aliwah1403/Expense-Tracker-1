@@ -1,12 +1,27 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import { useGlobalContext } from "../../context/globalContext";
 import { InnerLayout } from "../../styles/Layouts";
 import { dollar } from "../../utils/Icons";
 import Chart from "../Chart/Chart";
+import History from "../History/History";
 
 const Dashboard = () => {
-  const { totalIncome, totalExpense, totalBalance } = useGlobalContext();
+  const {
+    totalIncome,
+    incomes,
+    expenses,
+    totalExpense,
+    totalBalance,
+    getIncome,
+    getExpense,
+  } = useGlobalContext();
+
+  useEffect(() => {
+    getIncome();
+    getExpense();
+  }, []);
+
   return (
     <DashboardSytled>
       <InnerLayout>
@@ -33,6 +48,24 @@ const Dashboard = () => {
                   {dollar} {totalBalance()}
                 </p>
               </div>
+            </div>
+          </div>
+          <div className="history-con">
+            <History />
+            <h2 className="income-title">
+              Min <span>Income</span>Max
+            </h2>
+            <div className="income-item">
+              <p>{Math.min(...incomes.map((item) => item.amount))}</p>
+              <p>{Math.max(...incomes.map((item) => item.amount))}</p>
+            </div>
+
+            <h2 className="income-title">
+              Min <span>Expense</span>Max
+            </h2>
+            <div className="income-item">
+              <p>{Math.min(...expenses.map((item) => item.amount))}</p>
+              <p>{Math.max(...expenses.map((item) => item.amount))}</p>
             </div>
           </div>
         </div>
