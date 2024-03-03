@@ -44,7 +44,12 @@ const Dashboard = () => {
               </div>
               <div className="balance">
                 <h2>Total Balance</h2>
-                <p>
+                <p
+                  style={{
+                    color:
+                      totalExpense() > totalIncome( ) ? "red" : "var(--color-green)",
+                  }}
+                >
                   {dollar} {totalBalance()}
                 </p>
               </div>
@@ -111,7 +116,6 @@ const DashboardSytled = styled.div`
           flex-direction: column;
           align-items: center;
           p {
-            color: var(--color-green);
             opacity: 0.6;
             font-size: 4.5rem;
           }
