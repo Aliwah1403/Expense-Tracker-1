@@ -86,7 +86,7 @@ export const GlobalProvider = ({ children }) => {
       return new Date(b.createdAt) - new Date(a.createdAt);
     });
 
-    return history.slice(0,4);
+    return history.slice(0, 4);
   };
 
   return (
@@ -104,6 +104,8 @@ export const GlobalProvider = ({ children }) => {
         totalExpense,
         totalBalance,
         transactionHistory,
+        error,
+        setError,
       }}
     >
       {children}
