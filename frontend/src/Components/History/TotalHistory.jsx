@@ -32,29 +32,32 @@ const TotalHistory = () => {
         />
       </div>
       <HistoryStyled>
-        {filteredHistory.map((item) => {
-          const { _id, title, amount, type, date } = item;
-          return (
-            <div key={_id} className="history-item">
-              <p
-                style={{
-                  color: type === "expense" ? "red" : "var(--color-green)",
-                }}
-              >
-                {title}
-              </p>
-
-              <p
-                style={{
-                  color: type === "expense" ? "red" : "var(--color-green)",
-                }}
-              >
-                {type === "expense" ? `-${amount}` : `+${amount}`}
-              </p>
-              <p>{dateFormat(date)}</p>
-            </div>
-          );
-        })}
+        {filteredHistory.length === 0 ? (
+          <h1 className="noDataTitle">No data available</h1>
+        ) : (
+          filteredHistory.map((item) => {
+            const { _id, title, amount, type, date } = item;
+            return (
+              <div key={_id} className="history-item">
+                <p
+                  style={{
+                    color: type === "expense" ? "red" : "var(--color-green)",
+                  }}
+                >
+                  {title}
+                </p>
+                <p
+                  style={{
+                    color: type === "expense" ? "red" : "var(--color-green)",
+                  }}
+                >
+                  {type === "expense" ? `-${amount}` : `+${amount}`}
+                </p>
+                <p>{dateFormat(date)}</p>
+              </div>
+            );
+          })
+        )}
       </HistoryStyled>
     </>
   );
@@ -64,6 +67,16 @@ const HistoryStyled = styled.div`
   display: flex;
   flex-direction: column;
   gap: 1rem;
+  .noDataTitle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 70vh;
+    font-size: 60px;
+    text-transform: uppercase;
+    opacity: 0.3;
+    letter-spacing: 0.3rem;
+  }
   .history-item {
     background: #fcf6f9;
     border: 2px solid #ffffff;
