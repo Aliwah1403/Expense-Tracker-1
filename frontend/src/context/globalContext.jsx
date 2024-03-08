@@ -79,7 +79,7 @@ export const GlobalProvider = ({ children }) => {
     return totalIncome() - totalExpense();
   };
 
-  // Getting transaction history
+  // Getting recent transaction history
   const transactionHistory = () => {
     const history = [...incomes, ...expenses];
     history.sort((a, b) => {
@@ -87,6 +87,16 @@ export const GlobalProvider = ({ children }) => {
     });
 
     return history.slice(0, 4);
+  };
+
+  // Getting total transaction history
+  const totalTransactionHistory = () => {
+    const history = [...incomes, ...expenses];
+    history.sort((a, b) => {
+      return new Date(b.createdAt) - new Date(a.createdAt);
+    });
+
+    return history;
   };
 
   return (
@@ -104,6 +114,7 @@ export const GlobalProvider = ({ children }) => {
         totalExpense,
         totalBalance,
         transactionHistory,
+        totalTransactionHistory,
         error,
         setError,
       }}

@@ -25,7 +25,7 @@ const Dashboard = () => {
   return (
     <DashboardSytled>
       <InnerLayout>
-        <h1>All Transactions</h1>
+        <h1>Dashboard</h1>
         <div className="stats-con">
           <div className="chart-con">
             <Chart />
@@ -47,7 +47,9 @@ const Dashboard = () => {
                 <p
                   style={{
                     color:
-                      totalExpense() > totalIncome( ) ? "red" : "var(--color-green)",
+                      totalExpense() > totalIncome()
+                        ? "red"
+                        : "var(--color-green)",
                   }}
                 >
                   {dollar} {totalBalance()}
@@ -56,6 +58,7 @@ const Dashboard = () => {
             </div>
           </div>
           <div className="history-con">
+            <h2>Recent History</h2>
             <History />
             <h2 className="income-title">
               Min <span>Income</span>Max
@@ -80,6 +83,9 @@ const Dashboard = () => {
 };
 
 const DashboardSytled = styled.div`
+  h1 {
+    margin-bottom: 1rem;
+  }
   .stats-con {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
