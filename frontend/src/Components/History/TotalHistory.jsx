@@ -1,15 +1,16 @@
 import React from "react";
-import styled from "styled-components";
 import { useGlobalContext } from "../../context/globalContext";
+import styled from "styled-components";
+import { dateFormat } from "../../utils/dateFormat";
 
-const History = () => {
-  const { transactionHistory } = useGlobalContext();
+const TotalHistory = () => {
+  const { totalTransactionHistory } = useGlobalContext();
 
-  const [...history] = transactionHistory();
+  const [...history] = totalTransactionHistory();
   return (
     <HistoryStyled>
       {history.map((item) => {
-        const { _id, title, amount, type } = item;
+        const { _id, title, amount, type, date } = item;
         return (
           <div key={_id} className="history-item">
             <p
@@ -27,6 +28,7 @@ const History = () => {
             >
               {type === "expense" ? `-${amount}` : `+${amount}`}
             </p>
+            <p>{dateFormat(date)}</p>
           </div>
         );
       })}
@@ -45,9 +47,9 @@ const HistoryStyled = styled.div`
     padding: 1rem;
     border-radius: 20px;
     display: flex;
+    flex-direction: column-reverse;
     justify-content: space-between;
     align-items: center;
   }
 `;
-
-export default History;
+export default TotalHistory;
