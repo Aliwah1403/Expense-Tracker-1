@@ -8,9 +8,19 @@ import "react-datepicker/dist/react-datepicker.css";
 const TotalHistory = () => {
   const { totalTransactionHistory } = useGlobalContext();
 
+  const [selectedOption, setSelectedOption] = useState("all");
+
   const [selectedDate, setSelectedDate] = useState(null);
 
   const [...history] = totalTransactionHistory();
+
+  // dropdown menu to switch between all transactions and the date picker
+  const handleOptionChange = (e) => {
+    setSelectedOption(e.target.value);
+    if (e.target.value === "all") {
+      setSelectedDate(null);
+    }
+  };
 
   // using date-picker to filter out dates and only show transactions for selected date
   const handleDateChange = (date) => {
@@ -24,12 +34,42 @@ const TotalHistory = () => {
     : history;
   return (
     <>
-      <div>
-        <DatePicker
-          selected={selectedDate}
-          onChange={handleDateChange}
-          dateFormat="dd/MM/yyyy"
-        />
+      <div
+        className="selects"
+        style={{
+          display: "flex",
+          justifyContent: "flex-start",
+          marginBottom: "1rem",
+          gap: "0 10px",
+          color: "rgba(34,34,96,0.4)",
+        }}
+      >
+        <select
+          value={selectedOption}
+          onChange={handleOptionChange}
+          style={{
+            outline: "none",
+            border: "2px solid #fff",
+            padding: "0.5rem 1rem",
+            borderRadius: "5px",
+            background: "transparent",
+            resize: "none",
+            boxShadow: "var(--shadow-style)",
+            color: "rgba(34,34,96,0.9)",
+          }}
+        >
+          <option value="all">All Transactions</option>
+          <option value="date">Pick A Date</option>
+        </select>
+
+        {selectedOption === "date" && (
+          <DatePicker
+            placeholderText="Enter/Pick A Date"
+            selected={selectedDate}
+            onChange={handleDateChange}
+            dateFormat="dd/MM/yyyy"
+          />
+        )}
       </div>
       <HistoryStyled>
         {filteredHistory.length === 0 ? (
@@ -67,6 +107,23 @@ const HistoryStyled = styled.div`
   display: flex;
   flex-direction: column;
   gap: 1rem;
+
+  select {
+    margin-bottom: 0.5rem;
+    outline: none;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    border: 2px solid #fff;
+    background: transparent;
+    resize: none;
+    box-shadow: var(--shadow-style);
+    color: rgba(34, 34, 96, 0.9);
+    &::placeholder {
+      color: rgba(34, 34, 96, 0.4);
+    }
+  }
+
   .noDataTitle {
     display: flex;
     align-items: center;
