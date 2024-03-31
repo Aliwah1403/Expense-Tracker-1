@@ -11,7 +11,7 @@ const Navigation = ({ active, setActive }) => {
         <img src={avatar} alt="user-avatar" />
         <div className="text">
           <h2>Hello, Mike</h2>
-          <p>Welcome</p>
+          <p className="text-[#22226099]">Welcome</p>
         </div>
       </div>
 
@@ -31,7 +31,7 @@ const Navigation = ({ active, setActive }) => {
       </ul>
 
       <div className="bottom-nav">
-        <li>{signout} Sign Out</li>
+        <li>{signout} Sign In</li>
       </div>
     </NavStyled>
   );
@@ -68,8 +68,10 @@ const NavStyled = styled.nav`
     h2 {
       color: rgba(34, 34, 96, 1);
     }
-    p {
+    ${
+      "" /* p {
       color: rgba(34, 34, 96, 0.6);
+    } */
     }
   }
 
@@ -110,6 +112,12 @@ const NavStyled = styled.nav`
       height: 100%;
       background: #222260;
       border-radius: 0 10px 10px 0;
+    }
+  }
+
+  .bottom-nav {
+    li {
+      cursor: pointer;
     }
   }
 `;
