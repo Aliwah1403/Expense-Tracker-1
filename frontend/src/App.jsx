@@ -9,6 +9,7 @@ import Incomes from "./Components/Incomes/Incomes";
 import Expenses from "./Components/Expenses/Expenses";
 import { useGlobalContext } from "./context/globalContext";
 import Transactions from "./Components/Transactions/Transactions";
+import LoginPage from "./Components/Signup/LoginPage";
 
 function App() {
   const [active, setActive] = useState(1);
@@ -39,8 +40,9 @@ function App() {
     <AppStyled bg={bg} className="App">
       {orbMemo}
       <MainLayout>
-        <Navigation active={active} setActive={setActive} />
-        <main>{displayData()}</main>
+        {/* <Navigation active={active} setActive={setActive} />
+        <main>{displayData()}</main> */}
+        <LoginPage />
       </MainLayout>
     </AppStyled>
   );
