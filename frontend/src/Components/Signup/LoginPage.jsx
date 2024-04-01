@@ -126,7 +126,7 @@ const LoginPage = () => {
                   className="absolute top-1/2 left-3 transform -translate-y-1/2 h-5 w-5 bg-white rounded-full flex justify-center items-center"
                 />
                 <span className="capitalize ml-5 whitespace-nowrap">
-                  Signup with facebook
+                  continue with facebook
                 </span>
               </button>
             </div>
