@@ -25,37 +25,35 @@ const Dashboard = () => {
   return (
     <DashboardSytled>
       <InnerLayout>
-        <h1>Dashboard</h1>
+        <h1>Your Dashboard</h1>
+        <div className="amount-con">
+          <div className="income">
+            <h2>Total Income</h2>
+            <p>
+              {dollar} {totalIncome()}
+            </p>
+          </div>
+          <div className="expense">
+            <h2>Total Expense</h2>
+            <p>
+              {dollar} {totalExpense()}
+            </p>
+          </div>
+          <div className="balance">
+            <h2>Total Balance</h2>
+            <p
+              style={{
+                color:
+                  totalExpense() > totalIncome() ? "red" : "var(--color-green)",
+              }}
+            >
+              {dollar} {totalBalance()}
+            </p>
+          </div>
+        </div>
         <div className="stats-con">
           <div className="chart-con">
             <Chart />
-            <div className="amount-con">
-              <div className="income">
-                <h2>Total Income</h2>
-                <p>
-                  {dollar} {totalIncome()}
-                </p>
-              </div>
-              <div className="expense">
-                <h2>Total Expense</h2>
-                <p>
-                  {dollar} {totalExpense()}
-                </p>
-              </div>
-              <div className="balance">
-                <h2>Total Balance</h2>
-                <p
-                  style={{
-                    color:
-                      totalExpense() > totalIncome()
-                        ? "red"
-                        : "var(--color-green)",
-                  }}
-                >
-                  {dollar} {totalBalance()}
-                </p>
-              </div>
-            </div>
           </div>
           <div className="history-con">
             <h2>Recent History</h2>
@@ -86,47 +84,52 @@ const DashboardSytled = styled.div`
   h1 {
     margin-bottom: 1rem;
   }
+  .amount-con {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 0 1rem;
+    margin: 2rem 0;
+    .income,
+    .expense {
+      grid-column: span 2;
+    }
+    .income,
+    .expense,
+    .balance {
+      display: flex;
+      justify-content: center;
+      flex-direction: column;
+      align-items: center;
+      background: #fcf6f9;
+      border: 2px solid #ffffff;
+      box-shadow: var(--shadow-style);
+      border-radius: 10px;
+      padding: 5px 10px;
+      h2 {
+        font-size: 1.2rem;
+      }
+      p {
+        font-size: 0.75rem;
+        font-weight: 700;
+      }
+    }
+    .balance {
+      p {
+        opacity: 0.6;
+        font-size: 1rem;
+      }
+    }
+  }
   .stats-con {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
     gap: 2rem;
+
     .chart-con {
       grid-column: 1 / 4;
       height: 400px;
-      .amount-con {
-        display: grid;
-        grid-template-columns: repeat(4, 1fr);
-        gap: 2rem;
-        margin-top: 2rem;
-        .income,
-        .expense {
-          grid-column: span 2;
-        }
-        .income,
-        .expense,
-        .balance {
-          background: #fcf6f9;
-          border: 2px solid #ffffff;
-          box-shadow: var(--shadow-style);
-          border-radius: 20px;
-          padding: 1rem;
-          p {
-            font-size: 3.5rem;
-            font-weight: 700;
-          }
-        }
-        .balance {
-          grid-column: 2 /4;
-          display: flex;
-          justify-content: center;
-          flex-direction: column;
-          align-items: center;
-          p {
-            opacity: 0.6;
-            font-size: 4.5rem;
-          }
-        }
-      }
     }
     .history-con {
       grid-column: 4 / -1;
