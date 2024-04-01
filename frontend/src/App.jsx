@@ -40,9 +40,9 @@ function App() {
     <AppStyled bg={bg} className="App">
       {orbMemo}
       <MainLayout>
-        <Navigation active={active} setActive={setActive} />
-        <main>{displayData()}</main>
-        {/* <LoginPage /> */}
+        {/* <Navigation active={active} setActive={setActive} />
+        <main>{displayData()}</main> */}
+        <LoginPage />
       </MainLayout>
     </AppStyled>
   );
