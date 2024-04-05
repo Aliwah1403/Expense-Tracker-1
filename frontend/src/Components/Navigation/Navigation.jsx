@@ -5,6 +5,11 @@ import { menuItems } from "../../utils/menuItems";
 import { signout } from "../../utils/Icons";
 
 const Navigation = ({ active, setActive }) => {
+
+  const handleClick = () => {
+    alert('Button clicked')
+  }
+
   return (
     <NavStyled>
       <div className="user-con">
@@ -31,7 +36,11 @@ const Navigation = ({ active, setActive }) => {
       </ul>
 
       <div className="bottom-nav">
-        <li>{signout} Sign In</li>
+        <li>
+          <button 
+            onClick={handleClick}
+          >{signout} Sign Out</button>
+        </li>
       </div>
     </NavStyled>
   );
