@@ -1,4 +1,5 @@
 import React, { useMemo, useState } from "react";
+import {BrowserRouter, Routes, Route} from 'react-router-dom'
 import styled from "styled-components";
 import bg from "./images/bg.png";
 import { MainLayout } from "./styles/Layouts";
@@ -19,8 +20,12 @@ function App() {
     <AppStyled bg={bg} className="App">
       {orbMemo}
       <MainLayout>
-        {/* <Homepage /> */}
-        <LoginPage />
+        <BrowserRouter>
+        <Routes>
+          <Route index element={<LoginPage />}/>
+        {/* <LoginPage /> */}
+        </Routes>
+        </BrowserRouter>
       </MainLayout>
     </AppStyled>
   );
