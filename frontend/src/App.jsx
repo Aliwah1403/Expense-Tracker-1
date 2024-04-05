@@ -22,8 +22,7 @@ function App() {
       <MainLayout>
         <BrowserRouter>
         <Routes>
-          <Route index element={<LoginPage />}/>
-        {/* <LoginPage /> */}
+          <Route index element={<Homepage />}/>
         </Routes>
         </BrowserRouter>
       </MainLayout>
