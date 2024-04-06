@@ -20,11 +20,11 @@ const LoginPage = () => {
       <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
         <div className="sm:mx-auto sm:w-full sm:max-w-sm">
           <img
-            className="mx-auto h-10 w-auto"
+            className="mx-auto h-5 w-auto"
             src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
             alt="Your Company"
           />
-          <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
+          <h2 className="mt-8 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
             Sign in to your account
           </h2>
         </div>
@@ -48,7 +48,7 @@ const LoginPage = () => {
             type="text"
             autoComplete="name"
             required
-            className="block w-full rounded-md border-0 py-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+            className="block w-full rounded-md border-0 py-3 bg-transparent text-gray-900 shadow-sm ring-1 ring-inset ring-indigo-400 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
           />
         </div>
       </div>
@@ -69,7 +69,7 @@ const LoginPage = () => {
         type="email"
         autoComplete="email"
         required
-        className="block w-full rounded-md border-0 py-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+        className="block w-full rounded-md border-0 py-3 bg-transparent text-gray-900 shadow-sm ring-1 ring-inset ring-indigo-400 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
       />
     </div>
   </div>
@@ -90,14 +90,14 @@ const LoginPage = () => {
         type={passwordVisibility ? "text" : "password"}
         autoComplete="current-password"
         required
-        className="block w-full rounded-md border-0 py-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+        className="block w-full rounded-md border-0 py-3 bg-transparent text-gray-900 shadow-sm ring-1 ring-inset ring-indigo-400 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
       />
-      <button
-        className="absolute top-0 right-0 h-full px-2 opacity-70"
-        onClick={togglePasswordVisibility}
+      <i 
+      className="absolute flex justify-center items-center top-0 right-0 h-full px-2 opacity-70 cursor-pointer"
+      onClick={togglePasswordVisibility}
       >
-        {passwordVisibility ? <EyeOff size={16} /> : <Eye size={16} />}
-      </button>
+         {passwordVisibility ? <EyeOff size={16} /> : <Eye size={16} />}
+      </i>
     </div>
   
   </div>
@@ -119,8 +119,14 @@ const LoginPage = () => {
             type="password"
             autoComplete="new-password"
             required
-            className="block w-full rounded-md border-0 py-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+            className="block w-full rounded-md border-0 py-3 bg-transparent text-gray-900 shadow-sm ring-1 ring-inset ring-indigo-400 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
           />
+            {/* <i 
+      className="absolute flex justify-center items-center top-0 right-0 h-full px-2 opacity-70 cursor-pointer"
+      onClick={togglePasswordVisibility}
+      >
+         {passwordVisibility ? <EyeOff size={16} /> : <Eye size={16} />}
+      </i> */}
         </div>
       </div>
    
@@ -133,7 +139,7 @@ const LoginPage = () => {
       type="submit"
       className="flex w-full justify-center rounded-md bg-indigo-600 p-3 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
     >
-      {loginType === "signup" ? "Sign Up" : "Sign In"}
+      {loginType === "signup" ? "Sign Up" : "Log In"}
     </button>
   </div>
 
