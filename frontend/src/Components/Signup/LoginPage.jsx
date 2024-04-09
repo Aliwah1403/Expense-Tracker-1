@@ -8,6 +8,7 @@ const LoginPage = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [passwordVisibility, setPasswordVisibility] = useState(false);
   const [loginType, setLoginType] = useState("login");
+  const [error, setError] = useState("Failed Login");
 
   const togglePasswordVisibility = () => {
     setPasswordVisibility(!passwordVisibility);
@@ -126,6 +127,8 @@ const LoginPage = () => {
                 {loginType === "signup" ? "Sign Up" : "Log In"}
               </button>
             </div>
+
+            <div className="text-center text-red-500">{error}</div>
 
             <div className="relative h-[1px] w-full bg-slate-400 mx-0"></div>
 
