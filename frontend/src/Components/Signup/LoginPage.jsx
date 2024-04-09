@@ -2,8 +2,10 @@ import googleLogo from "../../images/google.png";
 import facebookLogo from "../../images/facebook.png";
 import { Eye, EyeOff } from "lucide-react";
 import { useState } from "react";
+import Loader from "../Loader/Loader";
 
 const LoginPage = () => {
+  const [isLoading, setIsLoading] = useState(false);
   const [passwordVisibility, setPasswordVisibility] = useState(false);
   const [loginType, setLoginType] = useState("login");
 
@@ -17,6 +19,8 @@ const LoginPage = () => {
 
   return (
     <>
+      {isLoading && <Loader></Loader>}
+
       <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
         <div className="sm:mx-auto sm:w-full sm:max-w-sm">
           <img
