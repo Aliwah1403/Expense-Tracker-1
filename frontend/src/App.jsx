@@ -1,5 +1,5 @@
 import React, { useMemo, useState } from "react";
-import {BrowserRouter, Routes, Route} from 'react-router-dom'
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import styled from "styled-components";
 import bg from "./images/bg.png";
 import { MainLayout } from "./styles/Layouts";
@@ -7,6 +7,7 @@ import Orb from "./Components/Orb/Orb";
 import { useGlobalContext } from "./context/globalContext";
 import LoginPage from "./Components/Signup/LoginPage";
 import Homepage from "./Homepage/Homepage";
+import Loader from "./Components/Loader/Loader";
 
 function App() {
   const global = useGlobalContext();
@@ -21,9 +22,9 @@ function App() {
       {orbMemo}
       <MainLayout>
         <BrowserRouter>
-        <Routes>
-          <Route index element={<LoginPage />}/>
-        </Routes>
+          <Routes>
+            <Route index element={<LoginPage />} />
+          </Routes>
         </BrowserRouter>
       </MainLayout>
     </AppStyled>
