@@ -3,7 +3,10 @@ import facebookLogo from "../../images/facebook.png";
 import { Eye, EyeOff } from "lucide-react";
 import { useState } from "react";
 import { auth } from "../../Firebase/config";
-import { createUserWithEmailAndPassword } from "firebase/auth";
+import {
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+} from "firebase/auth";
 import Loader from "../Loader/Loader";
 
 const LoginPage = () => {
@@ -45,6 +48,27 @@ const LoginPage = () => {
         const errorMessage = error.message;
         setError(errorMessage);
         // ..
+      });
+  };
+
+  const handleLogIn = (e) => {
+    e.preventDefault();
+    setError("");
+
+    signInWithEmailAndPassword(
+      auth,
+      userCredentials.email,
+      userCredentials.password
+    )
+      .then((userCredential) => {
+        // Signed in
+        const user = userCredential.user;
+        alert(`Welcome to your account`);
+        // ...
+      })
+      .catch((error) => {
+        const errorMessage = error.message;
+        setError(errorMessage);
       });
   };
 
@@ -157,6 +181,7 @@ const LoginPage = () => {
                 <button
                   type="submit"
                   className="flex w-full justify-center rounded-md bg-indigo-600 p-3 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                  onClick={(e) => handleLogIn(e)}
                 >
                   Log In
                 </button>
