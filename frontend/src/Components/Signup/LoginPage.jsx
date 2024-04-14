@@ -8,6 +8,7 @@ const LoginPage = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [passwordVisibility, setPasswordVisibility] = useState(false);
   const [loginType, setLoginType] = useState("login");
+  const [userCredentials, setUserCredentials] = useState({});
   const [error, setError] = useState("");
 
   const togglePasswordVisibility = () => {
@@ -16,6 +17,10 @@ const LoginPage = () => {
 
   const toggleLoginType = () => {
     setLoginType(loginType === "login" ? "signup" : "login");
+  };
+
+  const handleCredentials = (e) => {
+    setUserCredentials({ ...userCredentials, [e.target.name]: e.target.value });
   };
 
   return (
@@ -47,6 +52,7 @@ const LoginPage = () => {
                   </label>
                   <div className="mt-2">
                     <input
+                      onChange={(e) => handleCredentials(e)}
                       id="name"
                       name="name"
                       type="text"
@@ -68,6 +74,7 @@ const LoginPage = () => {
               </label>
               <div className="mt-2">
                 <input
+                  onChange={(e) => handleCredentials(e)}
                   id="email"
                   name="email"
                   type="email"
@@ -89,6 +96,7 @@ const LoginPage = () => {
               </div>
               <div className="mt-2 relative">
                 <input
+                  onChange={(e) => handleCredentials(e)}
                   id="password"
                   name="password"
                   type={passwordVisibility ? "text" : "password"}
