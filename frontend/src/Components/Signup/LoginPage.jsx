@@ -2,6 +2,8 @@ import googleLogo from "../../images/google.png";
 import facebookLogo from "../../images/facebook.png";
 import { Eye, EyeOff } from "lucide-react";
 import { useState } from "react";
+import { auth } from "../../Firebase/config";
+import { createUserWithEmailAndPassword } from "firebase/auth";
 import Loader from "../Loader/Loader";
 
 const LoginPage = () => {
@@ -25,7 +27,25 @@ const LoginPage = () => {
 
   const handleSignUp = (e) => {
     e.preventDefault();
-    alert("Button works");
+    setError("");
+
+    createUserWithEmailAndPassword(
+      auth,
+      userCredentials.email,
+      userCredentials.password
+    )
+      .then((userCredential) => {
+        // Signed up
+        const user = userCredential.user;
+        user.displayName = userCredentials.name;
+        console.log(user);
+        // ...
+      })
+      .catch((error) => {
+        const errorMessage = error.message;
+        setError(errorMessage);
+        // ..
+      });
   };
 
   return (
