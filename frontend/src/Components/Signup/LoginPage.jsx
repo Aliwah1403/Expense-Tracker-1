@@ -8,7 +8,7 @@ const LoginPage = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [passwordVisibility, setPasswordVisibility] = useState(false);
   const [loginType, setLoginType] = useState("login");
-  const [error, setError] = useState("Failed Login");
+  const [error, setError] = useState("");
 
   const togglePasswordVisibility = () => {
     setPasswordVisibility(!passwordVisibility);
