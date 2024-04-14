@@ -23,6 +23,11 @@ const LoginPage = () => {
     setUserCredentials({ ...userCredentials, [e.target.name]: e.target.value });
   };
 
+  const handleSignUp = (e) => {
+    e.preventDefault();
+    alert("Button works");
+  };
+
   return (
     <>
       {isLoading && <Loader></Loader>}
@@ -40,7 +45,7 @@ const LoginPage = () => {
         </div>
 
         <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-          <form className="space-y-6" action="#" method="POST">
+          <form className="space-y-6">
             {loginType === "signup" && (
               <>
                 <div>
@@ -131,6 +136,7 @@ const LoginPage = () => {
               <button
                 type="submit"
                 className="flex w-full justify-center rounded-md bg-indigo-600 p-3 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                onClick={(e) => handleSignUp(e)}
               >
                 {loginType === "signup" ? "Sign Up" : "Log In"}
               </button>
