@@ -6,6 +6,7 @@ import { auth } from "../../Firebase/config";
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
+  sendPasswordResetEmail,
 } from "firebase/auth";
 import Loader from "../Loader/Loader";
 
@@ -26,12 +27,11 @@ const LoginPage = () => {
 
   const handleCredentials = (e) => {
     setUserCredentials({ ...userCredentials, [e.target.name]: e.target.value });
+    setError("");
   };
 
   const handleSignUp = (e) => {
     e.preventDefault();
-    setError("");
-
     createUserWithEmailAndPassword(
       auth,
       userCredentials.email,
@@ -40,7 +40,6 @@ const LoginPage = () => {
       .then((userCredential) => {
         // Signed up
         const user = userCredential.user;
-        user.displayName = userCredentials.name;
         console.log(user);
         // ...
       })
@@ -53,7 +52,6 @@ const LoginPage = () => {
 
   const handleLogIn = (e) => {
     e.preventDefault();
-    setError("");
 
     signInWithEmailAndPassword(
       auth,
@@ -62,7 +60,7 @@ const LoginPage = () => {
     )
       .then((userCredential) => {
         // Signed in
-        const user = userCredential.user;
+        const user = auth.currentUser;
         alert(`Welcome to your account`);
         // ...
       })
@@ -70,6 +68,14 @@ const LoginPage = () => {
         const errorMessage = error.message;
         setError(errorMessage);
       });
+  };
+
+  const handlePasswordReset = () => {
+    const email = prompt(`Please enter your email`);
+    sendPasswordResetEmail(auth, email);
+    alert(
+      "An email has been sent to your inbox with instructions to reset your passoword"
+    );
   };
 
   return (
@@ -167,8 +173,8 @@ const LoginPage = () => {
               {loginType === "login" && (
                 <div className="text-sm mt-3 flex justify-end">
                   <a
-                    href="#"
-                    className="font-semibold text-indigo-400 hover:text-indigo-600"
+                    className="font-semibold text-indigo-400 cursor-pointer hover:text-indigo-600"
+                    onClick={handlePasswordReset}
                   >
                     Forgot password?
                   </a>
