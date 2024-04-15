@@ -26,12 +26,11 @@ const LoginPage = () => {
 
   const handleCredentials = (e) => {
     setUserCredentials({ ...userCredentials, [e.target.name]: e.target.value });
+    setError("");
   };
 
   const handleSignUp = (e) => {
     e.preventDefault();
-    setError("");
-
     createUserWithEmailAndPassword(
       auth,
       userCredentials.email,
@@ -53,7 +52,6 @@ const LoginPage = () => {
 
   const handleLogIn = (e) => {
     e.preventDefault();
-    setError("");
 
     signInWithEmailAndPassword(
       auth,
