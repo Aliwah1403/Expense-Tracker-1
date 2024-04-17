@@ -15,7 +15,7 @@ import { setUser } from "../../store/usersSlice";
 
 const LoginPage = () => {
   const dispatch = useDispatch();
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const [passwordVisibility, setPasswordVisibility] = useState(false);
   const [loginType, setLoginType] = useState("login");
   const [userCredentials, setUserCredentials] = useState({});
@@ -28,6 +28,9 @@ const LoginPage = () => {
       // ...
     } else {
       dispatch(setUser(null));
+    }
+    if (isLoading) {
+      setIsLoading(false);
     }
   });
 

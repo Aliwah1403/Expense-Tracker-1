@@ -3,12 +3,29 @@ import styled from "styled-components";
 import avatar from "../../images/avatar.png";
 import { menuItems } from "../../utils/menuItems";
 import { signout } from "../../utils/Icons";
+import { auth } from "../../Firebase/config";
+import { setUser } from "../../store/usersSlice";
+import { signOut } from "firebase/auth";
+import { useDispatch } from "react-redux";
 
 const Navigation = ({ active, setActive }) => {
+  const dispatch = useDispatch();
 
-  const handleClick = () => {
-    alert('Button clicked')
-  }
+  const handleSignOut = () => {
+    if (confirm("Are you sure you want to log out? ")) {
+      signOut(auth)
+        .then(() => {
+          // Sign-out successful.
+
+          dispatch(setUser(null));
+        })
+        .catch((error) => {
+          // An error happened.
+          console.log(error.message);
+          alert("An error occurred. Please try again!");
+        });
+    }
+  };
 
   return (
     <NavStyled>
@@ -37,9 +54,7 @@ const Navigation = ({ active, setActive }) => {
 
       <div className="bottom-nav">
         <li>
-          <button 
-            onClick={handleClick}
-          >{signout} Sign Out</button>
+          <button onClick={handleSignOut}>{signout} Sign Out</button>
         </li>
       </div>
     </NavStyled>
