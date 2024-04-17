@@ -7,6 +7,7 @@ import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   sendPasswordResetEmail,
+  onAuthStateChanged,
 } from "firebase/auth";
 import Loader from "../Loader/Loader";
 import { useDispatch } from "react-redux";
@@ -19,6 +20,16 @@ const LoginPage = () => {
   const [loginType, setLoginType] = useState("login");
   const [userCredentials, setUserCredentials] = useState({});
   const [error, setError] = useState("");
+
+  onAuthStateChanged(auth, (user) => {
+    if (user) {
+      dispatch(setUser({ id: user.uid, email: user.email }));
+      const uid = user.uid;
+      // ...
+    } else {
+      dispatch(setUser(null));
+    }
+  });
 
   const togglePasswordVisibility = () => {
     setPasswordVisibility(!passwordVisibility);
@@ -42,10 +53,7 @@ const LoginPage = () => {
     )
       .then((userCredential) => {
         // Signed up
-        const user = userCredential.user;
-        console.log(user);
-        dispatch(setUser({ id: user.uid, email: user.email }));
-        // ...
+        // User functionality being handled by the auth state observer
       })
       .catch((error) => {
         const errorMessage = error.message;
@@ -64,11 +72,7 @@ const LoginPage = () => {
     )
       .then((userCredential) => {
         // Signed in
-        const user = auth.currentUser;
-        dispatch(setUser({ id: user.uid, email: user.email }));
-        console.log(user);
-        alert(`Welcome to your account`);
-        // ...
+        // User functionality being handled by the auth state observer
       })
       .catch((error) => {
         const errorMessage = error.message;
