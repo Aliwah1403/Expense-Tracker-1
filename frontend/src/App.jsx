@@ -7,7 +7,8 @@ import Orb from "./Components/Orb/Orb";
 import { useGlobalContext } from "./context/globalContext";
 import LoginPage from "./Components/Signup/LoginPage";
 import Homepage from "./Homepage/Homepage";
-import Loader from "./Components/Loader/Loader";
+import { selectUsers } from "./store/usersSlice";
+import { useSelector } from "react-redux";
 
 function App() {
   const global = useGlobalContext();
@@ -17,15 +18,21 @@ function App() {
     return <Orb />;
   }, []);
 
+  const user = useSelector(selectUsers);
+
   return (
     <AppStyled bg={bg} className="App">
       {orbMemo}
       <MainLayout>
-        <BrowserRouter>
-          <Routes>
-            <Route index element={<LoginPage />} />
-          </Routes>
-        </BrowserRouter>
+        {user.currentUser ? (
+          <BrowserRouter>
+            <Routes>
+              <Route index element={<Homepage />} />
+            </Routes>
+          </BrowserRouter>
+        ) : (
+          <LoginPage />
+        )}
       </MainLayout>
     </AppStyled>
   );

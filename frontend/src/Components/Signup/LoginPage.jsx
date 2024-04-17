@@ -9,8 +9,11 @@ import {
   sendPasswordResetEmail,
 } from "firebase/auth";
 import Loader from "../Loader/Loader";
+import { useDispatch } from "react-redux";
+import { setUser } from "../../store/usersSlice";
 
 const LoginPage = () => {
+  const dispatch = useDispatch();
   const [isLoading, setIsLoading] = useState(false);
   const [passwordVisibility, setPasswordVisibility] = useState(false);
   const [loginType, setLoginType] = useState("login");
@@ -41,6 +44,7 @@ const LoginPage = () => {
         // Signed up
         const user = userCredential.user;
         console.log(user);
+        dispatch(setUser({ id: user.uid, email: user.email }));
         // ...
       })
       .catch((error) => {
@@ -61,6 +65,8 @@ const LoginPage = () => {
       .then((userCredential) => {
         // Signed in
         const user = auth.currentUser;
+        dispatch(setUser({ id: user.uid, email: user.email }));
+        console.log(user);
         alert(`Welcome to your account`);
         // ...
       })
