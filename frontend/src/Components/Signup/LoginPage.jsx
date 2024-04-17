@@ -173,7 +173,7 @@ const LoginPage = () => {
               {loginType === "login" && (
                 <div className="text-sm mt-3 flex justify-end">
                   <a
-                    className="font-semibold text-indigo-400 cursor-pointer hover:text-indigo-600"
+                    className="font-semibold underline text-indigo-400 cursor-pointer hover:text-indigo-600"
                     onClick={handlePasswordReset}
                   >
                     Forgot password?
