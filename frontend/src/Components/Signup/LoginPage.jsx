@@ -7,15 +7,32 @@ import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   sendPasswordResetEmail,
+  onAuthStateChanged,
 } from "firebase/auth";
 import Loader from "../Loader/Loader";
+import { useDispatch } from "react-redux";
+import { setUser } from "../../store/usersSlice";
 
 const LoginPage = () => {
-  const [isLoading, setIsLoading] = useState(false);
+  const dispatch = useDispatch();
+  const [isLoading, setIsLoading] = useState(true);
   const [passwordVisibility, setPasswordVisibility] = useState(false);
   const [loginType, setLoginType] = useState("login");
   const [userCredentials, setUserCredentials] = useState({});
   const [error, setError] = useState("");
+
+  onAuthStateChanged(auth, (user) => {
+    if (user) {
+      dispatch(setUser({ id: user.uid, email: user.email }));
+      const uid = user.uid;
+      // ...
+    } else {
+      dispatch(setUser(null));
+    }
+    if (isLoading) {
+      setIsLoading(false);
+    }
+  });
 
   const togglePasswordVisibility = () => {
     setPasswordVisibility(!passwordVisibility);
@@ -39,9 +56,7 @@ const LoginPage = () => {
     )
       .then((userCredential) => {
         // Signed up
-        const user = userCredential.user;
-        console.log(user);
-        // ...
+        // User functionality being handled by the auth state observer
       })
       .catch((error) => {
         const errorMessage = error.message;
@@ -60,9 +75,7 @@ const LoginPage = () => {
     )
       .then((userCredential) => {
         // Signed in
-        const user = auth.currentUser;
-        alert(`Welcome to your account`);
-        // ...
+        // User functionality being handled by the auth state observer
       })
       .catch((error) => {
         const errorMessage = error.message;
@@ -173,7 +186,7 @@ const LoginPage = () => {
               {loginType === "login" && (
                 <div className="text-sm mt-3 flex justify-end">
                   <a
-                    className="font-semibold text-indigo-400 cursor-pointer hover:text-indigo-600"
+                    className="font-semibold underline text-indigo-400 cursor-pointer hover:text-indigo-600"
                     onClick={handlePasswordReset}
                   >
                     Forgot password?
