@@ -5,6 +5,7 @@ import { InnerLayout } from "../../styles/Layouts";
 import { dollar } from "../../utils/Icons";
 import Chart from "../Chart/Chart";
 import History from "../History/History";
+import { Card } from "@tremor/react";
 
 const Dashboard = () => {
   const {
@@ -27,29 +28,50 @@ const Dashboard = () => {
       <InnerLayout>
         <h1>Your Dashboard</h1>
         <div className="amount-con">
-          <div className="income">
-            <h2>Total Income</h2>
-            <p>
-              {dollar} {totalIncome()}
+          <Card
+            className="mx-auto max-w-xs"
+            decoration="top"
+            decorationColor="indigo"
+          >
+            <p className="text-tremor-default text-tremor-content dark:text-dark-tremor-content">
+              Total Income
             </p>
-          </div>
-          <div className="expense">
-            <h2>Total Expense</h2>
-            <p>
-              {dollar} {totalExpense()}
+            <p className="text-3xl text-tremor-content-strong dark:text-dark-tremor-content-strong font-semibold">
+              $ {totalIncome()}
             </p>
-          </div>
-          <div className="balance">
-            <h2>Total Balance</h2>
+          </Card>
+
+          <Card
+            className="mx-auto max-w-xs"
+            decoration="top"
+            decorationColor="indigo"
+          >
+            <p className="text-tremor-default text-tremor-content dark:text-dark-tremor-content">
+              Total Expense
+            </p>
+            <p className="text-3xl text-tremor-content-strong dark:text-dark-tremor-content-strong font-semibold">
+              $ {totalExpense()}
+            </p>
+          </Card>
+
+          <Card
+            className="mx-auto max-w-xs"
+            decoration="top"
+            decorationColor="indigo"
+          >
+            <p className="text-tremor-default text-tremor-content dark:text-dark-tremor-content">
+              Balance
+            </p>
             <p
+              className="text-3xl font-semibold"
               style={{
                 color:
                   totalExpense() > totalIncome() ? "red" : "var(--color-green)",
               }}
             >
-              {dollar} {totalBalance()}
+              $ {totalBalance()}
             </p>
-          </div>
+          </Card>
         </div>
         <div className="stats-con">
           <div className="chart-con">
