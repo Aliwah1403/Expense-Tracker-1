@@ -73,6 +73,7 @@ const Dashboard = () => {
             </p>
           </Card>
         </div>
+
         <div className="stats-con">
           <div className="chart-con">
             <Chart />
@@ -145,8 +146,6 @@ const DashboardSytled = styled.div`
     }
   }
   .stats-con {
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
     gap: 2rem;
 
     .chart-con {
