@@ -8,6 +8,8 @@ import {
   signInWithEmailAndPassword,
   sendPasswordResetEmail,
   onAuthStateChanged,
+  GoogleAuthProvider,
+  signInWithPopup,
 } from "firebase/auth";
 import Loader from "../Loader/Loader";
 import { useDispatch } from "react-redux";
@@ -80,6 +82,24 @@ const LoginPage = () => {
       .catch((error) => {
         const errorMessage = error.message;
         setError(errorMessage);
+      });
+  };
+
+  const provider = new GoogleAuthProvider();
+  const handleGoogleAuth = () => {
+    signInWithPopup(auth, provider)
+      .then((res) => {
+        // once user successfully authenticates with google
+        const credential = GoogleAuthProvider.credentialFromResult(res);
+
+        const token = credential.accessToken;
+
+        const user = res.user;
+      })
+      .catch((error) => {
+        const errorMessage = error.message;
+        alert("An error has occured. Please try again!");
+        console.log(errorMessage);
       });
   };
 
@@ -220,7 +240,10 @@ const LoginPage = () => {
             <div className="relative h-[1px] w-full bg-slate-400 mx-0"></div>
 
             <div className="flex gap-4">
-              <button className="relative h-11 w-1/2 font-semibold p-4 rounded-lg text-xs tracking-[0.5px] cursor-pointer outline-0 border-0 bg-white">
+              <button
+                className="relative h-11 w-1/2 font-semibold p-4 rounded-lg text-xs tracking-[0.5px] cursor-pointer outline-0 border-0 bg-white"
+                onClick={handleGoogleAuth}
+              >
                 <img
                   src={googleLogo}
                   alt="google-logo"
