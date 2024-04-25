@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import avatar from "../../images/avatar.png";
 import { menuItems } from "../../utils/menuItems";
@@ -7,24 +7,25 @@ import { auth } from "../../Firebase/config";
 import { setUser } from "../../store/usersSlice";
 import { signOut } from "firebase/auth";
 import { useDispatch } from "react-redux";
+import { Dialog, DialogPanel, Button } from "@tremor/react";
 
 const Navigation = ({ active, setActive }) => {
   const dispatch = useDispatch();
 
-  const handleSignOut = () => {
-    if (confirm("Are you sure you want to log out? ")) {
-      signOut(auth)
-        .then(() => {
-          // Sign-out successful.
+  const [openDialog, setOpenDialog] = useState(false);
 
-          dispatch(setUser(null));
-        })
-        .catch((error) => {
-          // An error happened.
-          console.log(error.message);
-          alert("An error occurred. Please try again!");
-        });
-    }
+  const handleSignOut = () => {
+    signOut(auth)
+      .then(() => {
+        // Sign-out successful.
+
+        dispatch(setUser(null));
+      })
+      .catch((error) => {
+        // An error happened.
+        console.log(error.message);
+        alert("An error occurred. Please try again!");
+      });
   };
 
   return (
@@ -54,7 +55,37 @@ const Navigation = ({ active, setActive }) => {
 
       <div className="bottom-nav">
         <li>
-          <button onClick={handleSignOut}>{signout} Sign Out</button>
+          <button onClick={() => setOpenDialog(true)}>
+            {signout} Sign Out
+          </button>
+          <Dialog
+            open={openDialog}
+            onClose={(val) => setOpenDialog(val)}
+            static={true}
+          >
+            <DialogPanel>
+              <h3 className="text-lg font-semibold text-tremor-content-strong dark:text-dark-tremor-content-strong">
+                Your are about to Sign Out
+              </h3>
+              <p className="mt-2 leading-6 text-tremor-default text-tremor-content dark:text-dark-tremor-content">
+                Are you sure you want to log out of the app? This action will
+                send you back to the login page
+              </p>
+              <div className=" w-full flex flex-row gap-2">
+                <Button
+                  className="mt-8 w-1/2"
+                  variant="secondary"
+                  onClick={() => setOpenDialog(false)}
+                >
+                  Cancel
+                </Button>
+
+                <Button className="mt-8 w-1/2" onClick={handleSignOut}>
+                  Log Out
+                </Button>
+              </div>
+            </DialogPanel>
+          </Dialog>
         </li>
       </div>
     </NavStyled>
