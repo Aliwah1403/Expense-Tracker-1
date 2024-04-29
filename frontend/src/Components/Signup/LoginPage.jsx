@@ -2,7 +2,7 @@ import googleLogo from "../../images/google.png";
 import facebookLogo from "../../images/facebook.png";
 import { Eye, EyeOff } from "lucide-react";
 import { useState } from "react";
-import { auth } from "../../Firebase/config";
+import { auth, db } from "../../Firebase/config";
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
@@ -11,6 +11,7 @@ import {
   GoogleAuthProvider,
   signInWithPopup,
 } from "firebase/auth";
+import { doc, setDoc } from "firebase/firestore";
 import Loader from "../Loader/Loader";
 import { useDispatch } from "react-redux";
 import { setUser } from "../../store/usersSlice";
@@ -59,6 +60,22 @@ const LoginPage = () => {
       .then((userCredential) => {
         // Signed up
         // User functionality being handled by the auth state observer
+        const user = userCredential.user;
+        const userName = userCredentials.name;
+        setDoc(doc(db, "users", user.uid), {
+          name: userName,
+          email: user.email,
+          ID: user.uid,
+        });
+      })
+      .then(() => {
+        // Document successfully written
+        console.log("User data saved to Firestore");
+      })
+      .catch((error) => {
+        // Handle Firestore write error
+        console.error("Error writing document: ", error);
+        setError("Error saving user data");
       })
       .catch((error) => {
         const errorMessage = error.message;
