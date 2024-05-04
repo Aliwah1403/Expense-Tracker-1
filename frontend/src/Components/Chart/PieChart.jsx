@@ -33,12 +33,12 @@ const PieChart = () => {
         category="sales"
         index="name"
         valueFormatter={valueFormatter}
-        colors={["blue", "indigo"]}
+        colors={["blue", "red"]}
         className="w-40"
       />
       <Legend
         categories={[" Incomes", " Expenses"]}
-        colors={["blue", "indigo"]}
+        colors={["blue", "red"]}
         className="max-w-xs"
       />
     </div>

@@ -129,6 +129,26 @@ const Chart = () => {
       Income: 3239,
       Expense: 3736,
     },
+    {
+      date: "Jan 23",
+      Income: 3239,
+      Expense: 3736,
+    },
+    {
+      date: "Feb 23",
+      Income: 3239,
+      Expense: 3736,
+    },
+    {
+      date: "Mar 23",
+      Income: 3239,
+      Expense: 3736,
+    },
+    {
+      date: "Apr 23",
+      Income: 3239,
+      Expense: 3736,
+    },
   ];
 
   const finalData = [
@@ -146,13 +166,20 @@ const Chart = () => {
 
   return (
     <>
-      <ChartStyled>
+      {/* <ChartStyled>
         <Line data={data} />
-      </ChartStyled>
+      </ChartStyled> */}
 
       {/* <Card>
         <h3 className="text-lg font-medium text-tremor-content-strong dark:text-dark-tremor-content-strong">
-          Expenditure over time (USD)
+          Overview (USD)
+        </h3>
+        <Line data={data} />
+      </Card> */}
+
+      <Card>
+        <h3 className="text-lg font-medium text-tremor-content-strong dark:text-dark-tremor-content-strong">
+          Overview (USD)
         </h3>
         <LineChart
           className="mt-4 h-72"
@@ -163,7 +190,7 @@ const Chart = () => {
           colors={["green", "red"]}
           valueFormatter={valueFormatter}
         />
-      </Card> */}
+      </Card>
     </>
   );
 };
