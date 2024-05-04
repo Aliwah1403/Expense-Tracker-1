@@ -6,6 +6,7 @@ import { dollar } from "../../utils/Icons";
 import Chart from "../Chart/Chart";
 import History from "../History/History";
 import { Card } from "@tremor/react";
+import PieChart from "../Chart/PieChart";
 
 const Dashboard = () => {
   const {
@@ -77,6 +78,9 @@ const Dashboard = () => {
         <div className="stats-con">
           <div className="chart-con">
             <Chart />
+          </div>
+          <div className="mb-5">
+            <PieChart/>
           </div>
           <div className="history-con">
             <h2>Recent History</h2>
@@ -151,6 +155,7 @@ const DashboardSytled = styled.div`
     .chart-con {
       grid-column: 1 / 4;
       height: 400px;
+      margin-bottom: 3rem;
     }
     .history-con {
       grid-column: 4 / -1;

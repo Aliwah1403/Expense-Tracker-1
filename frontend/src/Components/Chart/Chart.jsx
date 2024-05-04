@@ -146,11 +146,11 @@ const Chart = () => {
 
   return (
     <>
-      {/* <ChartStyled>
+      <ChartStyled>
         <Line data={data} />
-      </ChartStyled> */}
+      </ChartStyled>
 
-      <Card>
+      {/* <Card>
         <h3 className="text-lg font-medium text-tremor-content-strong dark:text-dark-tremor-content-strong">
           Expenditure over time (USD)
         </h3>
@@ -163,7 +163,7 @@ const Chart = () => {
           colors={["green", "red"]}
           valueFormatter={valueFormatter}
         />
-      </Card>
+      </Card> */}
     </>
   );
 };

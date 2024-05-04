@@ -33,8 +33,8 @@ const Navigation = ({ active, setActive }) => {
       <div className="user-con">
         <img src={avatar} alt="user-avatar" />
         <div className="text">
-          <h2>Hello, Mike</h2>
-          <p className="text-[#22226099]">Welcome</p>
+          <h2 className="text-lg">User</h2>
+          <p className="text-[#22226099] text-sm">user@gmail.com</p>
         </div>
       </div>
 
