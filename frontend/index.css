@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+body {
+  @apply font-grotesk;
+}
+
 /* loader animation*/
 @keyframes bounce {
   0%,
