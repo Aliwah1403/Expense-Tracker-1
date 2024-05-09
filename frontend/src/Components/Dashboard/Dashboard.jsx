@@ -5,9 +5,10 @@ import { InnerLayout } from "../../styles/Layouts";
 import { dollar } from "../../utils/Icons";
 import Chart from "../Chart/Chart";
 import History from "../History/History";
-import { Card } from "@tremor/react";
+import { Card, DateRangePicker } from "@tremor/react";
 import PieChart from "../Chart/PieChart";
 import BarListChart from "../Chart/BarListChart";
+import { formattedCurrentDate } from "../../utils/dateFormat";
 
 const Dashboard = () => {
   const {
@@ -28,7 +29,19 @@ const Dashboard = () => {
   return (
     <DashboardSytled>
       <InnerLayout>
-        <h1>Your Dashboard</h1>
+        <div className="flex justify-between items-center mb-5">
+          <div>
+            {" "}
+            <p className="text-tremor-default text-tremor-content">
+              {formattedCurrentDate}
+            </p>
+            <p className="text-tremor-title text-tremor-content-strong font-semibold">
+              Good Morning! User
+            </p>
+          </div>
+          <DateRangePicker />
+        </div>
+
         <div className="amount-con">
           <Card
             className="mx-auto max-w-xs"

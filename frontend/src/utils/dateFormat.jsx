@@ -7,3 +7,7 @@ export const dateFormat = (date) => {
 export const chartDate = (date) => {
   return moment(date).format("MMM YY");
 };
+
+const currentDate = new Date();
+const options = { weekday: "long", month: "long", day: "numeric" };
+export const formattedCurrentDate = currentDate.toLocaleDateString("en-US", options);
