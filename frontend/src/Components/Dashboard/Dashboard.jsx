@@ -7,6 +7,7 @@ import Chart from "../Chart/Chart";
 import History from "../History/History";
 import { Card } from "@tremor/react";
 import PieChart from "../Chart/PieChart";
+import BarListChart from "../Chart/BarListChart";
 
 const Dashboard = () => {
   const {
@@ -79,27 +80,29 @@ const Dashboard = () => {
           <div className="chart-con">
             <Chart />
           </div>
-          <div className="flex justify-between flex-row items-center mt-10">
+          <div className="flex justify-between flex-row items-center mt-7">
             <PieChart />
-            {/* <div className="history-con">
-              <h2>Recent History</h2>
-              <History />
-              <h2 className="income-title">
-                Min <span>Income</span>Max
-              </h2>
-              <div className="income-item">
-                <p>{Math.min(...incomes.map((item) => item.amount))}</p>
-                <p>{Math.max(...incomes.map((item) => item.amount))}</p>
-              </div>
 
-              <h2 className="expense-title">
-                Min <span>Expense</span>Max
-              </h2>
-              <div className="expense-item">
-                <p>{Math.min(...expenses.map((item) => item.amount))}</p>
-                <p>{Math.max(...expenses.map((item) => item.amount))}</p>
-              </div>
-            </div> */}
+            <BarListChart />
+          </div>
+          <div className="history-con">
+            <h2>Recent History</h2>
+            <History />
+            <h2 className="income-title">
+              Min <span>Income</span>Max
+            </h2>
+            <div className="income-item">
+              <p>{Math.min(...incomes.map((item) => item.amount))}</p>
+              <p>{Math.max(...incomes.map((item) => item.amount))}</p>
+            </div>
+
+            <h2 className="expense-title">
+              Min <span>Expense</span>Max
+            </h2>
+            <div className="expense-item">
+              <p>{Math.min(...expenses.map((item) => item.amount))}</p>
+              <p>{Math.max(...expenses.map((item) => item.amount))}</p>
+            </div>
           </div>
         </div>
       </InnerLayout>
@@ -151,14 +154,16 @@ const DashboardSytled = styled.div`
   }
   .stats-con {
     gap: 2rem;
+    display: flex;
+    flex-direction: column;
 
     .chart-con {
-      ${'' /* grid-column: 1 / 4; */}
+      ${"" /* grid-column: 1 / 4; */}
       height: 400px;
       margin-bottom: 3rem;
     }
     .history-con {
-      ${'' /* grid-column: 4 / -1; */}
+      ${"" /* grid-column: 4 / -1; */}
       h2 {
         margin: 1rem 0;
         display: flex;
