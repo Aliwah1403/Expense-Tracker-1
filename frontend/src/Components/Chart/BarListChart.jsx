@@ -123,7 +123,10 @@ const BarListChart = () => {
           variant="light"
           icon={TrendingUp}
           onClick={() => handleOrder("ascending")}
-          className={order === "ascending" ? "active-button" : ""}
+          active={order === "ascending"}
+          className={`text-neutral-600 ${
+            order === "ascending" ? "text-blue-500 border-b-2 border-blue-500" : ""
+          }`}
         >
           Ascending
         </Button>
@@ -131,8 +134,10 @@ const BarListChart = () => {
           variant="light"
           icon={TrendingDown}
           onClick={() => handleOrder("descending")}
-        //   className={order === "descending" ? "active-button" : ""}
-        className="text-neutral-700"
+          active={order === "descending"}
+          className={`text-neutral-600 ${
+            order === "descending" ? "text-blue-500 border-b-2 border-blue-500" : ""
+          }`}
         >
           Descending
         </Button>
