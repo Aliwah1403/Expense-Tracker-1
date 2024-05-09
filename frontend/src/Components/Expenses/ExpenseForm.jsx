@@ -1,7 +1,8 @@
 import React from "react";
 import { useState } from "react";
 import styled from "styled-components";
-import DatePicker from "react-datepicker";
+// import DatePicker from "react-datepicker";
+import { DatePicker } from "@tremor/react";
 import "react-datepicker/dist/react-datepicker.css";
 import { useGlobalContext } from "../../context/globalContext";
 import Button from "../Button/Button";
@@ -61,11 +62,10 @@ const ExpenseForm = () => {
 
       <div className="input-control">
         <DatePicker
-          id="date"
-          placeholderText="Enter/Pick A Date"
-          selected={date}
-          dateFormat="dd/MM/yyyy"
-          onChange={(date) => {
+          className="mx-auto max-w-sm"
+          maxDate={new Date()}
+          // value={date}
+          onValueChange={(date) => {
             setInputState({ ...inputState, date: date });
           }}
         />
