@@ -2,7 +2,7 @@ import React from "react";
 import { useState } from "react";
 import styled from "styled-components";
 // import DatePicker from "react-datepicker";
-import { DatePicker } from "@tremor/react";
+import { DatePicker, Select, SelectItem } from "@tremor/react";
 import "react-datepicker/dist/react-datepicker.css";
 import { useGlobalContext } from "../../context/globalContext";
 import Button from "../Button/Button";
@@ -70,11 +70,21 @@ const Form = () => {
             setInputState({ ...inputState, date: date });
           }}
         />
-       
       </div>
 
       <div className="selects input-control">
-        <select
+        <Select placeholder="Select Category" enableClear="true">
+          <SelectItem value="salary">Salary</SelectItem>
+          <SelectItem value="freelancing">Freelancing</SelectItem>
+          <SelectItem value="investments">Investments</SelectItem>
+          <SelectItem value="stocks">Stocks</SelectItem>
+          <SelectItem value="bitcoin">Bitcoin</SelectItem>
+          <SelectItem value="bank">Bank Transfer</SelectItem>
+          <SelectItem value="youtube">Youtube</SelectItem>
+          <SelectItem value="other">Other</SelectItem>
+        </Select>
+
+        {/* <select
           required
           value={category}
           name="category"
@@ -92,7 +102,7 @@ const Form = () => {
           <option value="bank">Bank Transfer</option>
           <option value="youtube">Youtube</option>
           <option value="other">Other</option>
-        </select>
+        </select> */}
       </div>
 
       <div className="input-control">
