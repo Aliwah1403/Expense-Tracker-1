@@ -8,7 +8,7 @@ import History from "../History/History";
 import { Card, DateRangePicker } from "@tremor/react";
 import PieChart from "../Chart/PieChart";
 import BarListChart from "../Chart/BarListChart";
-import { formattedCurrentDate } from "../../utils/dateFormat";
+import { dayGreeting, formattedCurrentDate } from "../../utils/dateFormat";
 
 const Dashboard = () => {
   const {
@@ -20,6 +20,8 @@ const Dashboard = () => {
     getIncome,
     getExpense,
   } = useGlobalContext();
+
+  const greeting = dayGreeting();
 
   useEffect(() => {
     getIncome();
@@ -36,7 +38,7 @@ const Dashboard = () => {
               {formattedCurrentDate}
             </p>
             <p className="text-tremor-title text-tremor-content-strong font-semibold">
-              Good Morning! User
+              {greeting}! User
             </p>
           </div>
           <DateRangePicker />
