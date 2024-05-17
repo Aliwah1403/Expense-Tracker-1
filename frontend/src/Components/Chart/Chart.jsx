@@ -151,15 +151,7 @@ const Chart = () => {
     },
   ];
 
-  //   const combinedData = [...incomes, ...expenses];
 
-  // const finalData = combinedData.map((item) => {
-  //   return {
-  //     date: chartDate(item.date), // Assuming chartDate formats the date correctly
-  //     Income: item.type === "income" ? item.amount : 0,
-  //     Expense: item.type === "expense" ? item.amount : 0,
-  //   };
-  // });
 
   // Combine incomes and expenses into a single array
   const combinedData = [...incomes, ...expenses];
@@ -190,10 +182,6 @@ const Chart = () => {
 
   return (
     <>
-      {/* <ChartStyled>
-        <Line data={data} />
-      </ChartStyled> */}
-
       {/* <Card>
         <h3 className="text-lg font-medium text-tremor-content-strong dark:text-dark-tremor-content-strong">
           Overview (USD)
