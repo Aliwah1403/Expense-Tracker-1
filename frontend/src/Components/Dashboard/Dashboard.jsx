@@ -95,12 +95,12 @@ const Dashboard = () => {
           <div className="chart-con">
             <Chart />
           </div>
-          <div className="flex justify-between flex-row items-center mt-7">
+          <div className="flex justify-between flex-row items-center mt-2">
             <PieChart />
 
             <BarListChart />
           </div>
-          <div className="history-con">
+          {/* <div className="history-con">
             <h2>Recent History</h2>
             <History />
             <h2 className="income-title">
@@ -118,7 +118,7 @@ const Dashboard = () => {
               <p>{Math.min(...expenses.map((item) => item.amount))}</p>
               <p>{Math.max(...expenses.map((item) => item.amount))}</p>
             </div>
-          </div>
+          </div> */}
         </div>
       </InnerLayout>
     </DashboardSytled>
@@ -175,7 +175,7 @@ const DashboardSytled = styled.div`
     .chart-con {
       ${"" /* grid-column: 1 / 4; */}
       height: 400px;
-      margin-bottom: 3rem;
+      ${'' /* margin-bottom: 3rem; */}
     }
     .history-con {
       ${"" /* grid-column: 4 / -1; */}
