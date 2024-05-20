@@ -7,7 +7,13 @@ const Transactions = () => {
   return (
     <IncomeStyled>
       <InnerLayout>
-        <h1>All Transactions</h1>
+        <h3 className="font-semibold text-tremor-content-strong dark:text-dark-tremor-content-strong">
+          Transactions
+        </h3>
+        <p className="mt-1 text-tremor-default leading-6 text-tremor-content dark:text-dark-tremor-content">
+          Overview of all transactions recorded.
+        </p>
+
         <TotalHistory />
       </InnerLayout>
     </IncomeStyled>
