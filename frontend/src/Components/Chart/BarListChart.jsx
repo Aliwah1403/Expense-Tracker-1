@@ -3,28 +3,7 @@ import { TrendingUp, TrendingDown } from "lucide-react";
 import { useState } from "react";
 import { useGlobalContext } from "../../context/globalContext";
 
-const data = [
-  {
-    name: "Twitter",
-    value: 456,
-  },
-  {
-    name: "Google",
-    value: 351,
-  },
-  {
-    name: "GitHub",
-    value: 271,
-  },
-  {
-    name: "Reddit",
-    value: 191,
-  },
-  {
-    name: "Youtube",
-    value: 91,
-  },
-];
+
 
 const BarListChart = () => {
   const { totalExpense, totalIncome, incomes, expenses } = useGlobalContext();
