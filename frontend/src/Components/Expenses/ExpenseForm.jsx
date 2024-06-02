@@ -1,8 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import styled from "styled-components";
-// import DatePicker from "react-datepicker";
-import { DatePicker } from "@tremor/react";
+import { DatePicker, Select, SelectItem } from "@tremor/react";
 import "react-datepicker/dist/react-datepicker.css";
 import { useGlobalContext } from "../../context/globalContext";
 import Button from "../Button/Button";
@@ -21,7 +20,9 @@ const ExpenseForm = () => {
   const { title, amount, date, category, description } = inputState;
 
   const handleInput = (name) => (e) => {
-    setInputState({ ...inputState, [name]: e.target.value });
+    // Check if 'e' is an event or a direct value
+    const value = e && e.target ? e.target.value : e;
+    setInputState({ ...inputState, [name]: value });
     setError("");
   };
 
@@ -72,25 +73,25 @@ const ExpenseForm = () => {
       </div>
 
       <div className="selects input-control">
-        <select
+        <Select
           required
           value={category}
           name="category"
           id="category"
           onChange={handleInput("category")}
         >
-          <option value="" disabled>
+          <SelectItem value="" disabled>
             Select Option
-          </option>
-          <option value="education">Education</option>
-          <option value="groceries">Groceries</option>
-          <option value="health">Health</option>
-          <option value="subscriptions">Subscriptions</option>
-          <option value="takeaways">Takeaways</option>
-          <option value="clothing">Clothing</option>
-          <option value="traveling">Travelling</option>
-          <option value="other">Other</option>
-        </select>
+          </SelectItem>
+          <SelectItem value="education">Education</SelectItem>
+          <SelectItem value="groceries">Groceries</SelectItem>
+          <SelectItem value="health">Health</SelectItem>
+          <SelectItem value="subscriptions">Subscriptions</SelectItem>
+          <SelectItem value="takeaways">Takeaways</SelectItem>
+          <SelectItem value="clothing">Clothing</SelectItem>
+          <SelectItem value="traveling">Travelling</SelectItem>
+          <SelectItem value="other">Other</SelectItem>
+        </Select>
       </div>
 
       <div className="input-control">

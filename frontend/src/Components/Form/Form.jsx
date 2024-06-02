@@ -1,7 +1,6 @@
 import React from "react";
 import { useState } from "react";
 import styled from "styled-components";
-// import DatePicker from "react-datepicker";
 import { DatePicker, Select, SelectItem } from "@tremor/react";
 import "react-datepicker/dist/react-datepicker.css";
 import { useGlobalContext } from "../../context/globalContext";
@@ -20,10 +19,12 @@ const Form = () => {
 
   const { title, amount, date, category, description } = inputState;
 
-  const handleInput = (name) => (e) => {
-    setInputState({ ...inputState, [name]: e.target.value });
-    setError("");
-  };
+   const handleInput = (name) => (e) => {
+     // Check if 'e' is an event or a direct value
+     const value = e && e.target ? e.target.value : e;
+     setInputState({ ...inputState, [name]: value });
+     setError("")
+   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -73,7 +74,12 @@ const Form = () => {
       </div>
 
       <div className="selects input-control">
-        <Select placeholder="Select Category" enableClear="true">
+        <Select
+          placeholder="Select Category"
+          enableClear="true"
+          value={category}
+          onValueChange={handleInput("category")}
+        >
           <SelectItem value="salary">Salary</SelectItem>
           <SelectItem value="freelancing">Freelancing</SelectItem>
           <SelectItem value="investments">Investments</SelectItem>
