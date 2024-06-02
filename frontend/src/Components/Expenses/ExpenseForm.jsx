@@ -1,10 +1,10 @@
 import React from "react";
 import { useState } from "react";
 import styled from "styled-components";
-import { DatePicker, Select, SelectItem } from "@tremor/react";
+import { DatePicker, Select, SelectItem, Button } from "@tremor/react";
 import "react-datepicker/dist/react-datepicker.css";
 import { useGlobalContext } from "../../context/globalContext";
-import Button from "../Button/Button";
+// import Button from "../Button/Button";
 import { plus } from "../../utils/Icons";
 
 const ExpenseForm = () => {
@@ -106,16 +106,7 @@ const ExpenseForm = () => {
         ></textarea>
       </div>
 
-      <div className="submit-btn">
-        <Button
-          name={"Add Expense"}
-          icon={plus}
-          bPad={".8rem 1.6rem"}
-          bRad={"30px"}
-          bg={"var(--color-accent)"}
-          color={"#fff"}
-        />
-      </div>
+      <Button variant="primary">Add Expense</Button>
     </ExpenseFormStyled>
   );
 };

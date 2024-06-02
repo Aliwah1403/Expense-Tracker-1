@@ -1,10 +1,10 @@
 import React from "react";
 import { useState } from "react";
 import styled from "styled-components";
-import { DatePicker, Select, SelectItem } from "@tremor/react";
+import { DatePicker, Select, SelectItem, Button } from "@tremor/react";
 import "react-datepicker/dist/react-datepicker.css";
 import { useGlobalContext } from "../../context/globalContext";
-import Button from "../Button/Button";
+// import Button from "../Button/Button";
 import { plus } from "../../utils/Icons";
 
 const Form = () => {
@@ -19,12 +19,12 @@ const Form = () => {
 
   const { title, amount, date, category, description } = inputState;
 
-   const handleInput = (name) => (e) => {
-     // Check if 'e' is an event or a direct value
-     const value = e && e.target ? e.target.value : e;
-     setInputState({ ...inputState, [name]: value });
-     setError("")
-   };
+  const handleInput = (name) => (e) => {
+    // Check if 'e' is an event or a direct value
+    const value = e && e.target ? e.target.value : e;
+    setInputState({ ...inputState, [name]: value });
+    setError("");
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -123,7 +123,8 @@ const Form = () => {
         ></textarea>
       </div>
 
-      <div className="submit-btn">
+      <Button variant="primary">Add Income</Button>
+      {/* <div className="submit-btn">
         <Button
           name={"Add Income"}
           icon={plus}
@@ -132,7 +133,7 @@ const Form = () => {
           bg={"var(--color-accent)"}
           color={"#fff"}
         />
-      </div>
+      </div> */}
     </FormStyled>
   );
 };
