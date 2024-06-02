@@ -211,7 +211,13 @@ const TotalHistory = () => {
         <TableBody>
           {tableData.map((item) => (
             <TableRow key={item.type}>
-              <TableCell className="font-medium text-tremor-content-strong dark:text-dark-tremor-content-strong">
+              <TableCell
+                className={`font-medium ${
+                  item.type === "expense"
+                    ? "text-red-500"
+                    : "text-tremor-content-strong dark:text-dark-tremor-content-strong"
+                }`}
+              >
                 {/* will make green for income type and red for expense type */}
                 {item.type}
               </TableCell>
