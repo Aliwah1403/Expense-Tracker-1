@@ -12,10 +12,12 @@ const Form = () => {
   const [inputState, setInputState] = useState({
     title: "",
     amount: "",
-    date: "",
+    date: null,
     category: "",
     description: "",
   });
+
+  const [loading, setLoading] = useState(false);
 
   const { title, amount, date, category, description } = inputState;
 
@@ -26,17 +28,24 @@ const Form = () => {
     setError("");
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    addIncome(inputState);
-    getIncome();
-    setInputState({
-      title: "",
-      amount: "",
-      date: "",
-      category: "",
-      description: "",
-    });
+    setLoading(true);
+    try {
+      await addIncome(inputState);
+      await getIncome();
+      setInputState({
+        title: "",
+        amount: "",
+        date: null,
+        category: "",
+        description: "",
+      });
+    } catch (error) {
+      alert("An error occurred", error.message);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -89,26 +98,6 @@ const Form = () => {
           <SelectItem value="youtube">Youtube</SelectItem>
           <SelectItem value="other">Other</SelectItem>
         </Select>
-
-        {/* <select
-          required
-          value={category}
-          name="category"
-          id="category"
-          onChange={handleInput("category")}
-        >
-          <option value="" disabled>
-            Select Option
-          </option>
-          <option value="salary">Salary</option>
-          <option value="freelancing">Freelancing</option>
-          <option value="investments">Investments</option>
-          <option value="stocks">Stocks</option>
-          <option value="bitcoin">Bitcoin</option>
-          <option value="bank">Bank Transfer</option>
-          <option value="youtube">Youtube</option>
-          <option value="other">Other</option>
-        </select> */}
       </div>
 
       <div className="input-control">
@@ -123,17 +112,9 @@ const Form = () => {
         ></textarea>
       </div>
 
-      <Button variant="primary">Add Income</Button>
-      {/* <div className="submit-btn">
-        <Button
-          name={"Add Income"}
-          icon={plus}
-          bPad={".8rem 1.6rem"}
-          bRad={"30px"}
-          bg={"var(--color-accent)"}
-          color={"#fff"}
-        />
-      </div> */}
+      <Button variant="primary" loading={loading} loadingText="Processing...">
+        Add Income
+      </Button>
     </FormStyled>
   );
 };
