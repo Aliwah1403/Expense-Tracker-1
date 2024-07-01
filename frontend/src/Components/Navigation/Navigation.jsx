@@ -8,6 +8,7 @@ import { signout } from "../../utils/Icons";
 // import { signOut } from "firebase/auth";
 // import { useDispatch } from "react-redux";
 import { Dialog, DialogPanel, Button } from "@tremor/react";
+import { NavLink } from "react-router-dom";
 
 const Navigation = ({ active, setActive }) => {
   // const dispatch = useDispatch();
@@ -41,13 +42,14 @@ const Navigation = ({ active, setActive }) => {
       <ul className="menu-items">
         {menuItems.map((item) => {
           return (
-            <li
-              key={item.id}
-              onClick={() => setActive(item.id)}
-              className={active === item.id ? "active" : ""}
-            >
-              {item.icon}
-              <span>{item.title}</span>
+            <li key={item.id}>
+              <NavLink
+                to={item.link}
+                className={({ isActive }) => (isActive ? "active" : "")}
+              >
+                {item.icon}
+                <span>{item.title}</span>
+              </NavLink>
             </li>
           );
         })}
@@ -80,9 +82,7 @@ const Navigation = ({ active, setActive }) => {
                   Cancel
                 </Button>
 
-                <Button className="mt-8 w-1/2" >
-                  Log Out
-                </Button>
+                <Button className="mt-8 w-1/2">Log Out</Button>
               </div>
             </DialogPanel>
           </Dialog>
