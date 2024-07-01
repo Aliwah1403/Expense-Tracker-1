@@ -12,10 +12,12 @@ const ExpenseForm = () => {
   const [inputState, setInputState] = useState({
     title: "",
     amount: "",
-    date: "",
+    date: null,
     category: "",
     description: "",
   });
+
+  const [loading, setLoading] = useState(false);
 
   const { title, amount, date, category, description } = inputState;
 
@@ -26,16 +28,26 @@ const ExpenseForm = () => {
     setError("");
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    addExpense(inputState);
-    setInputState({
-      title: "",
-      amount: "",
-      date: "",
-      category: "",
-      description: "",
-    });
+    setLoading(true);
+    try {
+      await addExpense(inputState);
+      await setInputState({
+        title: "",
+        amount: "",
+        date: "",
+        category: "",
+        description: "",
+      });
+    } catch (error) {
+      alert("An error occurred", error.message);
+    } finally {
+      setTimeout(() => {
+         setLoading(false);
+      }, 1000);
+     
+    }
   };
 
   return (
@@ -106,7 +118,7 @@ const ExpenseForm = () => {
         ></textarea>
       </div>
 
-      <Button variant="primary">Add Expense</Button>
+      <Button variant="primary" loading={loading} loadingText="Processing...">Add Expense</Button>
     </ExpenseFormStyled>
   );
 };
