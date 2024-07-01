@@ -7,24 +7,23 @@ import Orb from "./Components/Orb/Orb";
 import { useGlobalContext } from "./context/globalContext";
 import LoginPage from "./Components/Signup/LoginPage";
 import Homepage from "./Homepage/Homepage";
-import { selectUsers } from "./store/usersSlice";
+// import { selectUsers } from "./store/usersSlice";
 import { useSelector } from "react-redux";
 
 function App() {
   const global = useGlobalContext();
-  console.log(global);
 
   const orbMemo = useMemo(() => {
     return <Orb />;
   }, []);
 
-  const user = useSelector(selectUsers);
+  // const user = useSelector(selectUsers);
 
   return (
     <AppStyled bg={bg} className="App">
       {orbMemo}
       <MainLayout>
-        {user.currentUser ? (
+        {/* {user.currentUser ? (
           <BrowserRouter>
             <Routes>
               <Route index element={<Homepage />} />
@@ -32,7 +31,12 @@ function App() {
           </BrowserRouter>
         ) : (
           <LoginPage />
-        )}
+        )} */}
+        <BrowserRouter>
+          <Routes>
+            <Route index element={<Homepage />} />
+          </Routes>
+        </BrowserRouter>
       </MainLayout>
     </AppStyled>
   );

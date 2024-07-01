@@ -3,30 +3,30 @@ import styled from "styled-components";
 import avatar from "../../images/avatar.png";
 import { menuItems } from "../../utils/menuItems";
 import { signout } from "../../utils/Icons";
-import { auth } from "../../Firebase/config";
-import { setUser } from "../../store/usersSlice";
-import { signOut } from "firebase/auth";
-import { useDispatch } from "react-redux";
+// import { auth } from "../../Firebase/config";
+// import { setUser } from "../../store/usersSlice";
+// import { signOut } from "firebase/auth";
+// import { useDispatch } from "react-redux";
 import { Dialog, DialogPanel, Button } from "@tremor/react";
 
 const Navigation = ({ active, setActive }) => {
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
 
   const [openDialog, setOpenDialog] = useState(false);
 
-  const handleSignOut = () => {
-    signOut(auth)
-      .then(() => {
-        // Sign-out successful.
+  // const handleSignOut = () => {
+  //   signOut(auth)
+  //     .then(() => {
+  //       // Sign-out successful.
 
-        dispatch(setUser(null));
-      })
-      .catch((error) => {
-        // An error happened.
-        console.log(error.message);
-        alert("An error occurred. Please try again!");
-      });
-  };
+  //       dispatch(setUser(null));
+  //     })
+  //     .catch((error) => {
+  //       // An error happened.
+  //       console.log(error.message);
+  //       alert("An error occurred. Please try again!");
+  //     });
+  // };
 
   return (
     <NavStyled>
@@ -80,7 +80,7 @@ const Navigation = ({ active, setActive }) => {
                   Cancel
                 </Button>
 
-                <Button className="mt-8 w-1/2" onClick={handleSignOut}>
+                <Button className="mt-8 w-1/2" >
                   Log Out
                 </Button>
               </div>
