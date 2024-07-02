@@ -23,15 +23,7 @@ function App() {
     <AppStyled bg={bg} className="App">
       {orbMemo}
       <MainLayout>
-        {/* {user.currentUser ? (
-          <BrowserRouter>
-            <Routes>
-              <Route index element={<Homepage />} />
-            </Routes>
-          </BrowserRouter>
-        ) : (
-          <LoginPage />
-        )} */}
+      
         <BrowserRouter>
           <Routes>
             <Route index element={<Homepage />} />
