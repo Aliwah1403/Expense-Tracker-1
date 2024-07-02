@@ -2,40 +2,40 @@ import googleLogo from "../../images/google.png";
 import facebookLogo from "../../images/facebook.png";
 import { Eye, EyeOff } from "lucide-react";
 import { useState } from "react";
-import { auth, db } from "../../Firebase/config";
-import {
-  createUserWithEmailAndPassword,
-  signInWithEmailAndPassword,
-  sendPasswordResetEmail,
-  onAuthStateChanged,
-  GoogleAuthProvider,
-  signInWithPopup,
-} from "firebase/auth";
-import { doc, setDoc } from "firebase/firestore";
+// import { auth, db } from "../../Firebase/config";
+// import {
+//   createUserWithEmailAndPassword,
+//   signInWithEmailAndPassword,
+//   sendPasswordResetEmail,
+//   onAuthStateChanged,
+//   GoogleAuthProvider,
+//   signInWithPopup,
+// } from "firebase/auth";
+// import { doc, setDoc } from "firebase/firestore";
 import Loader from "../Loader/Loader";
-import { useDispatch } from "react-redux";
-import { setUser } from "../../store/usersSlice";
+// import { useDispatch } from "react-redux";
+// import { setUser } from "../../store/usersSlice";
 
 const LoginPage = () => {
-  const dispatch = useDispatch();
-  const [isLoading, setIsLoading] = useState(true);
+  // const dispatch = useDispatch();
+  const [isLoading, setIsLoading] = useState(false);
   const [passwordVisibility, setPasswordVisibility] = useState(false);
   const [loginType, setLoginType] = useState("login");
-  const [userCredentials, setUserCredentials] = useState({});
+  // const [userCredentials, setUserCredentials] = useState({});
   const [error, setError] = useState("");
 
-  onAuthStateChanged(auth, (user) => {
-    if (user) {
-      dispatch(setUser({ id: user.uid, email: user.email }));
-      const uid = user.uid;
-      // ...
-    } else {
-      dispatch(setUser(null));
-    }
-    if (isLoading) {
-      setIsLoading(false);
-    }
-  });
+  // onAuthStateChanged(auth, (user) => {
+  //   if (user) {
+  //     dispatch(setUser({ id: user.uid, email: user.email }));
+  //     const uid = user.uid;
+  //     // ...
+  //   } else {
+  //     dispatch(setUser(null));
+  //   }
+  //   if (isLoading) {
+  //     setIsLoading(false);
+  //   }
+  // });
 
   const togglePasswordVisibility = () => {
     setPasswordVisibility(!passwordVisibility);
@@ -50,75 +50,75 @@ const LoginPage = () => {
     setError("");
   };
 
-  const handleSignUp = (e) => {
-    e.preventDefault();
-    createUserWithEmailAndPassword(
-      auth,
-      userCredentials.email,
-      userCredentials.password
-    )
-      .then((userCredential) => {
-        // Signed up
-        // User functionality being handled by the auth state observer
-        const user = userCredential.user;
-        const userName = userCredentials.name;
-        setDoc(doc(db, "users", user.uid), {
-          name: userName,
-          email: user.email,
-          ID: user.uid,
-        });
-      })
-      .then(() => {
-        // Document successfully written
-        console.log("User data saved to Firestore");
-      })
-      .catch((error) => {
-        // Handle Firestore write error
-        console.error("Error writing document: ", error);
-        setError("Error saving user data");
-      })
-      .catch((error) => {
-        const errorMessage = error.message;
-        setError(errorMessage);
-        // ..
-      });
-  };
+  // const handleSignUp = (e) => {
+  //   e.preventDefault();
+  //   createUserWithEmailAndPassword(
+  //     auth,
+  //     userCredentials.email,
+  //     userCredentials.password
+  //   )
+  //     .then((userCredential) => {
+  //       // Signed up
+  //       // User functionality being handled by the auth state observer
+  //       const user = userCredential.user;
+  //       const userName = userCredentials.name;
+  //       setDoc(doc(db, "users", user.uid), {
+  //         name: userName,
+  //         email: user.email,
+  //         ID: user.uid,
+  //       });
+  //     })
+  //     .then(() => {
+  //       // Document successfully written
+  //       console.log("User data saved to Firestore");
+  //     })
+  //     .catch((error) => {
+  //       // Handle Firestore write error
+  //       console.error("Error writing document: ", error);
+  //       setError("Error saving user data");
+  //     })
+  //     .catch((error) => {
+  //       const errorMessage = error.message;
+  //       setError(errorMessage);
+  //       // ..
+  //     });
+  // };
 
-  const handleLogIn = (e) => {
-    e.preventDefault();
+  // const handleLogIn = (e) => {
+  //   e.preventDefault();
 
-    signInWithEmailAndPassword(
-      auth,
-      userCredentials.email,
-      userCredentials.password
-    )
-      .then((userCredential) => {
-        // Signed in
-        // User functionality being handled by the auth state observer
-      })
-      .catch((error) => {
-        const errorMessage = error.message;
-        setError(errorMessage);
-      });
-  };
+  //   signInWithEmailAndPassword(
+  //     auth,
+  //     userCredentials.email,
+  //     userCredentials.password
+  //   )
+  //     .then((userCredential) => {
+  //       // Signed in
+  //       // User functionality being handled by the auth state observer
+  //     })
+  //     .catch((error) => {
+  //       const errorMessage = error.message;
+  //       setError(errorMessage);
+  //     });
+  // };
 
-  const provider = new GoogleAuthProvider();
-  const handleGoogleAuth = () => {
-    signInWithPopup(auth, provider)
-      .then((res) => {
-        // once user successfully authenticates with google
-        const credential = GoogleAuthProvider.credentialFromResult(res);
+  // const provider = new GoogleAuthProvider();
+  // const handleGoogleAuth = () => {
+  //   signInWithPopup(auth, provider)
+  //     .then((res) => {
+  //       // once user successfully authenticates with google
+  //       const credential = GoogleAuthProvider.credentialFromResult(res);
 
-        const token = credential.accessToken;
+  //       const token = credential.accessToken;
 
-        const user = res.user;
-      })
-      .catch((error) => {
-        const errorMessage = error.message;
-        alert("An error has occured. Please try again!");
-        console.log(errorMessage);
-      });
-  };
+  //       const user = res.user;
+  //     })
+  //     .catch((error) => {
+  //       const errorMessage = error.message;
+  //       alert("An error has occured. Please try again!");
+  //       console.log(errorMessage);
+  //     });
+  // };
 
   const handlePasswordReset = () => {
     const email = prompt(`Please enter your email`);
@@ -237,7 +237,7 @@ const LoginPage = () => {
                 <button
                   type="submit"
                   className="flex w-full justify-center rounded-md bg-indigo-600 p-3 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-                  onClick={(e) => handleLogIn(e)}
+                  // onClick={(e) => handleLogIn(e)}
                 >
                   Log In
                 </button>
@@ -245,7 +245,7 @@ const LoginPage = () => {
                 <button
                   type="submit"
                   className="flex w-full justify-center rounded-md bg-indigo-600 p-3 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-                  onClick={(e) => handleSignUp(e)}
+                  // onClick={(e) => handleSignUp(e)}
                 >
                   Sign Up
                 </button>
@@ -259,7 +259,7 @@ const LoginPage = () => {
             <div className="flex gap-4">
               <button
                 className="relative h-11 w-1/2 font-semibold p-4 rounded-lg text-xs tracking-[0.5px] cursor-pointer outline-0 border-0 bg-white"
-                onClick={handleGoogleAuth}
+                // onClick={handleGoogleAuth}
               >
                 <img
                   src={googleLogo}
