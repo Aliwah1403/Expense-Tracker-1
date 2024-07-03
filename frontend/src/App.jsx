@@ -6,8 +6,6 @@ import { MainLayout } from "./styles/Layouts";
 import Orb from "./Components/Orb/Orb";
 import { useGlobalContext } from "./context/globalContext";
 import LoginPage from "./Components/Signup/LoginPage";
-import Homepage from "./Homepage/Homepage";
-// import { selectUsers } from "./store/usersSlice";
 import { useSelector } from "react-redux";
 import Dashboard from "./Components/Dashboard/Dashboard";
 import Incomes from "./Components/Incomes/Incomes";
@@ -23,7 +21,6 @@ function App() {
     return <Orb />;
   }, []);
 
-  // const user = useSelector(selectUsers);
 
   return (
     <AppStyled bg={bg} className="App">
