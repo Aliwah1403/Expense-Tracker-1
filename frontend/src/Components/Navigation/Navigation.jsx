@@ -7,6 +7,9 @@ import { Dialog, DialogPanel, Button } from "@tremor/react";
 import { NavLink } from "react-router-dom";
 
 const Navigation = ({ active, setActive }) => {
+
+  const [openDialog, setOpenDialog] = useState(false);
+
   return (
     <NavStyled>
       <div className="user-con">

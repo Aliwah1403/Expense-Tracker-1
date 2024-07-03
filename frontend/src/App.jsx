@@ -1,5 +1,5 @@
 import React, { useMemo, useState } from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Outlet } from "react-router-dom";
 import styled from "styled-components";
 import bg from "./images/bg.png";
 import { MainLayout } from "./styles/Layouts";
@@ -13,6 +13,7 @@ import Incomes from "./Components/Incomes/Incomes";
 import Navigation from "./Components/Navigation/Navigation";
 import Expenses from "./Components/Expenses/Expenses";
 import Transactions from "./Components/Transactions/Transactions";
+import { Button } from "@tremor/react";
 
 function App() {
   const global = useGlobalContext();
@@ -26,7 +27,10 @@ function App() {
     <AppStyled bg={bg} className="App">
       {orbMemo}
       <MainLayout>
-        <BrowserRouter>
+        <main>
+         <Outlet/>
+        </main>
+        {/* <BrowserRouter>
           <Navigation />
           <main>
             <Routes>
@@ -37,7 +41,7 @@ function App() {
               <Route path="/" element={<Dashboard />} />
             </Routes>
           </main>
-        </BrowserRouter>
+        </BrowserRouter> */}
       </MainLayout>
     </AppStyled>
   );
@@ -52,7 +56,7 @@ const AppStyled = styled.div`
     background: rgba(252, 246, 249, 0.78);
     border: 3px solid #ffffff;
     backdrop-filter: blur(4.5px);
-    border-radius: 32px;
+    ${'' /* border-radius: 32px; */}
     overflow-x: hidden;
     &::-webkit-scrollbar {
       width: 0;
