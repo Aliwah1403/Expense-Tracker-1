@@ -1,13 +1,16 @@
 import React, { useMemo, useState } from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import {
+  BrowserRouter,
+  Routes,
+  Route,
+  Outlet,
+  Navigate,
+} from "react-router-dom";
 import styled from "styled-components";
 import bg from "./images/bg.png";
 import { MainLayout } from "./styles/Layouts";
 import Orb from "./Components/Orb/Orb";
 import { useGlobalContext } from "./context/globalContext";
-import LoginPage from "./Components/Signup/LoginPage";
-import Homepage from "./Homepage/Homepage";
-// import { selectUsers } from "./store/usersSlice";
 import { useSelector } from "react-redux";
 import Dashboard from "./Components/Dashboard/Dashboard";
 import Incomes from "./Components/Incomes/Incomes";
@@ -15,6 +18,8 @@ import Incomes from "./Components/Incomes/Incomes";
 import Navigation from "./Components/Navigation/Navigation";
 import Expenses from "./Components/Expenses/Expenses";
 import Transactions from "./Components/Transactions/Transactions";
+import { Button } from "@tremor/react";
+import { useUser } from "@clerk/clerk-react";
 
 function App() {
   const global = useGlobalContext();
@@ -23,13 +28,21 @@ function App() {
     return <Orb />;
   }, []);
 
-  // const user = useSelector(selectUsers);
+  const { user, isLoaded, isSignedIn } = useUser();
+
+  if (!isSignedIn && isLoaded) {
+    return <Navigate to={"/auth/sign-in"} />;
+  }
 
   return (
     <AppStyled bg={bg} className="App">
       {orbMemo}
       <MainLayout>
-        <BrowserRouter>
+        <Navigation />
+        <main>
+          <Outlet />
+        </main>
+        {/* <BrowserRouter>
           <Navigation />
           <main>
             <Routes>
@@ -40,7 +53,7 @@ function App() {
               <Route path="/" element={<Dashboard />} />
             </Routes>
           </main>
-        </BrowserRouter>
+        </BrowserRouter> */}
       </MainLayout>
     </AppStyled>
   );
@@ -55,7 +68,7 @@ const AppStyled = styled.div`
     background: rgba(252, 246, 249, 0.78);
     border: 3px solid #ffffff;
     backdrop-filter: blur(4.5px);
-    border-radius: 32px;
+    ${"" /* border-radius: 32px; */}
     overflow-x: hidden;
     &::-webkit-scrollbar {
       width: 0;

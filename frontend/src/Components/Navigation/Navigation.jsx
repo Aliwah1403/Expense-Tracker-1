@@ -3,36 +3,19 @@ import styled from "styled-components";
 import avatar from "../../images/avatar.png";
 import { menuItems } from "../../utils/menuItems";
 import { signout } from "../../utils/Icons";
-// import { auth } from "../../Firebase/config";
-// import { setUser } from "../../store/usersSlice";
-// import { signOut } from "firebase/auth";
-// import { useDispatch } from "react-redux";
 import { Dialog, DialogPanel, Button } from "@tremor/react";
 import { NavLink } from "react-router-dom";
+import { UserButton } from "@clerk/clerk-react";
 
 const Navigation = ({ active, setActive }) => {
-  // const dispatch = useDispatch();
 
   const [openDialog, setOpenDialog] = useState(false);
-
-  // const handleSignOut = () => {
-  //   signOut(auth)
-  //     .then(() => {
-  //       // Sign-out successful.
-
-  //       dispatch(setUser(null));
-  //     })
-  //     .catch((error) => {
-  //       // An error happened.
-  //       console.log(error.message);
-  //       alert("An error occurred. Please try again!");
-  //     });
-  // };
 
   return (
     <NavStyled>
       <div className="user-con">
-        <img src={avatar} alt="user-avatar" />
+        {/* <img src={avatar} alt="user-avatar" /> */}
+        <UserButton/>
         <div className="text">
           <h2 className="text-lg">User</h2>
           <p className="text-[#22226099] text-sm">user@gmail.com</p>
