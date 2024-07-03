@@ -5,6 +5,7 @@ import { menuItems } from "../../utils/menuItems";
 import { signout } from "../../utils/Icons";
 import { Dialog, DialogPanel, Button } from "@tremor/react";
 import { NavLink } from "react-router-dom";
+import { UserButton } from "@clerk/clerk-react";
 
 const Navigation = ({ active, setActive }) => {
 
@@ -13,7 +14,8 @@ const Navigation = ({ active, setActive }) => {
   return (
     <NavStyled>
       <div className="user-con">
-        <img src={avatar} alt="user-avatar" />
+        {/* <img src={avatar} alt="user-avatar" /> */}
+        <UserButton/>
         <div className="text">
           <h2 className="text-lg">User</h2>
           <p className="text-[#22226099] text-sm">user@gmail.com</p>

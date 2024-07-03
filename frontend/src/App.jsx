@@ -11,7 +11,6 @@ import bg from "./images/bg.png";
 import { MainLayout } from "./styles/Layouts";
 import Orb from "./Components/Orb/Orb";
 import { useGlobalContext } from "./context/globalContext";
-import LoginPage from "./Components/Signup/LoginPage";
 import { useSelector } from "react-redux";
 import Dashboard from "./Components/Dashboard/Dashboard";
 import Incomes from "./Components/Incomes/Incomes";
@@ -31,7 +30,7 @@ function App() {
 
   const { user, isLoaded, isSignedIn } = useUser();
 
-  if (!isSignedIn) {
+  if (!isSignedIn && isLoaded) {
     return <Navigate to={"/auth/sign-in"} />;
   }
 
