@@ -27,6 +27,7 @@ function App() {
     <AppStyled bg={bg} className="App">
       {orbMemo}
       <MainLayout>
+      <Navigation />
         <main>
          <Outlet/>
         </main>
