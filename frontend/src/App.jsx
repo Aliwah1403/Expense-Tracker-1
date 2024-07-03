@@ -1,5 +1,11 @@
 import React, { useMemo, useState } from "react";
-import { BrowserRouter, Routes, Route, Outlet } from "react-router-dom";
+import {
+  BrowserRouter,
+  Routes,
+  Route,
+  Outlet,
+  Navigate,
+} from "react-router-dom";
 import styled from "styled-components";
 import bg from "./images/bg.png";
 import { MainLayout } from "./styles/Layouts";
@@ -14,6 +20,7 @@ import Navigation from "./Components/Navigation/Navigation";
 import Expenses from "./Components/Expenses/Expenses";
 import Transactions from "./Components/Transactions/Transactions";
 import { Button } from "@tremor/react";
+import { useUser } from "@clerk/clerk-react";
 
 function App() {
   const global = useGlobalContext();
@@ -22,14 +29,19 @@ function App() {
     return <Orb />;
   }, []);
 
+  const { user, isLoaded, isSignedIn } = useUser();
+
+  if (!isSignedIn) {
+    return <Navigate to={"/auth/sign-in"} />;
+  }
 
   return (
     <AppStyled bg={bg} className="App">
       {orbMemo}
       <MainLayout>
-      <Navigation />
+        <Navigation />
         <main>
-         <Outlet/>
+          <Outlet />
         </main>
         {/* <BrowserRouter>
           <Navigation />
@@ -57,7 +69,7 @@ const AppStyled = styled.div`
     background: rgba(252, 246, 249, 0.78);
     border: 3px solid #ffffff;
     backdrop-filter: blur(4.5px);
-    ${'' /* border-radius: 32px; */}
+    ${"" /* border-radius: 32px; */}
     overflow-x: hidden;
     &::-webkit-scrollbar {
       width: 0;
