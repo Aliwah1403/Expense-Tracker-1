@@ -9,6 +9,7 @@ import { Card, DateRangePicker } from "@tremor/react";
 import PieChart from "../Chart/PieChart";
 import BarListChart from "../Chart/BarListChart";
 import { dayGreeting, formattedCurrentDate } from "../../utils/dateFormat";
+import BarDataChart from "../Chart/BarDataChart";
 
 const Dashboard = () => {
   const {
@@ -93,7 +94,8 @@ const Dashboard = () => {
 
         <div className="stats-con">
           <div className="chart-con">
-            <Chart />
+            {/* <Chart /> */}
+            <BarDataChart />
           </div>
           <div className="flex justify-between flex-row items-center mt-2">
             <PieChart />
