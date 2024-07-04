@@ -5,19 +5,23 @@ import { menuItems } from "../../utils/menuItems";
 import { signout } from "../../utils/Icons";
 import { Dialog, DialogPanel, Button } from "@tremor/react";
 import { NavLink } from "react-router-dom";
-import { UserButton } from "@clerk/clerk-react";
+import { UserButton, useUser } from "@clerk/clerk-react";
 
 const Navigation = ({ active, setActive }) => {
-
   const [openDialog, setOpenDialog] = useState(false);
+
+  // const { user } = useUser();
+  // const userName = user.username;
+  // const userEmail = user.emailAddresses;
+  // console.log(userName);
 
   return (
     <NavStyled>
       <div className="user-con">
         {/* <img src={avatar} alt="user-avatar" /> */}
-        <UserButton/>
+        <UserButton />
         <div className="text">
-          <h2 className="text-lg">User</h2>
+          <h2 className="text-lg">user</h2>
           <p className="text-[#22226099] text-sm">user@gmail.com</p>
         </div>
       </div>
