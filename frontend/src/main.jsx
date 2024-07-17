@@ -9,6 +9,9 @@ import SignIn from "./auth/sign-in/SignIn.jsx";
 import Dashboard from "./Components/Dashboard/Dashboard.jsx";
 import Homepage from "./Homepage/Homepage.jsx";
 import { ClerkProvider } from "@clerk/clerk-react";
+import Transactions from "./Components/Transactions/Transactions.jsx";
+import Incomes from "./Components/Incomes/Incomes.jsx";
+import Expenses from "./Components/Expenses/Expenses.jsx";
 
 const PUBLISHABLE_KEY = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY;
 
@@ -28,6 +31,18 @@ const router = createBrowserRouter([
       {
         path: "/dashboard",
         element: <Dashboard />,
+      },
+      {
+        path: "/transactions",
+        element: <Transactions />,
+      },
+      {
+        path: "/incomes",
+        element: <Incomes />,
+      },
+      {
+        path: "/expenses",
+        element: <Expenses />,
       },
     ],
   },

@@ -9,6 +9,8 @@ import { Card, DateRangePicker } from "@tremor/react";
 import PieChart from "../Chart/PieChart";
 import BarListChart from "../Chart/BarListChart";
 import { dayGreeting, formattedCurrentDate } from "../../utils/dateFormat";
+import BarDataChart from "../Chart/BarDataChart";
+import { valueFormatter } from "../../utils/currencyFormat";
 
 const Dashboard = () => {
   const {
@@ -54,7 +56,7 @@ const Dashboard = () => {
               Total Income
             </p>
             <p className="text-3xl text-tremor-content-strong dark:text-dark-tremor-content-strong font-semibold">
-              $ {totalIncome()}
+              {valueFormatter(totalIncome())}
             </p>
           </Card>
 
@@ -67,7 +69,7 @@ const Dashboard = () => {
               Total Expense
             </p>
             <p className="text-3xl text-tremor-content-strong dark:text-dark-tremor-content-strong font-semibold">
-              $ {totalExpense()}
+              {valueFormatter(totalExpense())}
             </p>
           </Card>
 
@@ -86,14 +88,15 @@ const Dashboard = () => {
                   totalExpense() > totalIncome() ? "red" : "var(--color-green)",
               }}
             >
-              $ {totalBalance()}
+              {valueFormatter(totalBalance())}
             </p>
           </Card>
         </div>
 
         <div className="stats-con">
           <div className="chart-con">
-            <Chart />
+            {/* <Chart /> */}
+            <BarDataChart />
           </div>
           <div className="flex justify-between flex-row items-center mt-2">
             <PieChart />
@@ -175,7 +178,7 @@ const DashboardSytled = styled.div`
     .chart-con {
       ${"" /* grid-column: 1 / 4; */}
       height: 400px;
-      ${'' /* margin-bottom: 3rem; */}
+      ${"" /* margin-bottom: 3rem; */}
     }
     .history-con {
       ${"" /* grid-column: 4 / -1; */}
