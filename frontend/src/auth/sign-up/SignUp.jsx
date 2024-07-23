@@ -2,6 +2,8 @@ import { SignUp } from "@clerk/clerk-react";
 import COVER_IMAGE from "../../../public/login-background.jpg";
 import LOGO_IMG from "/assets/logos/logo.svg";
 
+const SIGNIN_URL = import.meta.env.VITE_CLERK_SIGN_IN_URL;
+
 const SignUpPage = () => {
   return (
     <div className="w-full h-screen flex items-start">
@@ -19,7 +21,7 @@ const SignUpPage = () => {
       </div>
       <div className="w-1/2 h-full bg-[#f5f5f5] flex justify-center flex-col p-10">
         <div className="w-full flex items-center justify-center">
-          <SignUp />
+          <SignUp signInUrl={SIGNIN_URL} />
         </div>
       </div>
     </div>
