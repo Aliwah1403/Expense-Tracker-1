@@ -12,9 +12,9 @@ import { ClerkProvider } from "@clerk/clerk-react";
 import Transactions from "./Components/Transactions/Transactions.jsx";
 import Incomes from "./Components/Incomes/Incomes.jsx";
 import Expenses from "./Components/Expenses/Expenses.jsx";
+import SignUp from "./auth/sign-up/SignUp.jsx";
 
 const PUBLISHABLE_KEY = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY;
-
 
 if (!PUBLISHABLE_KEY) {
   throw new Error("Missing Publishable Key");
@@ -49,6 +49,10 @@ const router = createBrowserRouter([
   {
     path: "/auth/sign-in",
     element: <SignIn />,
+  },
+  {
+    path: "/auth/sign-up",
+    element: <SignUp />,
   },
 ]);
 
