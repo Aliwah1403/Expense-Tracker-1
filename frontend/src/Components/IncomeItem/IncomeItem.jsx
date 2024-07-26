@@ -81,7 +81,6 @@ const IncomeItem = ({
     }
   };
 
-  console.log("type is: ", type);
 
   return (
     <IncomeItemStyled indicator={indicatorColor}>
