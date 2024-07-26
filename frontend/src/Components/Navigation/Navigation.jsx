@@ -5,77 +5,98 @@ import { menuItems } from "../../utils/menuItems";
 import { signout } from "../../utils/Icons";
 import { Dialog, DialogPanel, Button } from "@tremor/react";
 import { NavLink } from "react-router-dom";
-import { UserButton, useUser } from "@clerk/clerk-react";
+import { UserButton, useUser, useClerk } from "@clerk/clerk-react";
 
 const Navigation = ({ active, setActive }) => {
   const [openDialog, setOpenDialog] = useState(false);
 
-  const { user } = useUser();
-  const userName = user.username;
-  const userEmail = user.emailAddresses;
+  const { user, isLoaded } = useUser();
+  const userName = user?.username || "User";
+  const userEmail = user?.emailAddresses;
+
+  const { signOut } = useClerk();
 
   return (
     <NavStyled>
-      <div className="user-con">
-        {/* <img src={avatar} alt="user-avatar" /> */}
-        <UserButton />
-        <div className="text">
-          <h2 className="text-lg capitalize">{userName}</h2>
-          <p className="text-[#22226099] text-sm">
-            {userEmail.length > 0 && userEmail[0].emailAddress}
-          </p>
-        </div>
-      </div>
-
-      <ul className="menu-items">
-        {menuItems.map((item) => {
-          return (
-            <li key={item.id}>
-              <NavLink
-                to={item.link}
-                className={({ isActive }) => (isActive ? "active" : "")}
-              >
-                {item.icon}
-                <span>{item.title}</span>
-              </NavLink>
-            </li>
-          );
-        })}
-      </ul>
-
-      <div className="bottom-nav">
-        <li>
-          <button onClick={() => setOpenDialog(true)}>
-            {signout} Sign Out
-          </button>
-          <Dialog
-            open={openDialog}
-            onClose={(val) => setOpenDialog(val)}
-            static={true}
-          >
-            <DialogPanel>
-              <h3 className="text-lg font-semibold text-tremor-content-strong dark:text-dark-tremor-content-strong">
-                Your are about to Sign Out
-              </h3>
-              <p className="mt-2 leading-6 text-tremor-default text-tremor-content dark:text-dark-tremor-content">
-                Are you sure you want to log out of the app? This action will
-                send you back to the login page
+      {isLoaded ? (
+        <>
+          <div className="user-con">
+            <UserButton
+              appearance={{
+                elements: {
+                  userButtonBox: "h-10",
+                  avatarBox: "size-[80px]",
+                },
+              }}
+            />
+            <div className="text">
+              <h2 className="text-lg capitalize">{userName}</h2>
+              <p className="text-[#22226099] text-sm">
+                {userEmail && userEmail.length > 0
+                  ? userEmail[0].emailAddress
+                  : "No email available"}
               </p>
-              <div className=" w-full flex flex-row gap-2">
-                <Button
-                  className="mt-8 w-1/2"
-                  variant="secondary"
-                  onClick={() => setOpenDialog(false)}
-                >
-                  Cancel
-                </Button>
+            </div>
+          </div>
 
-                <Button className="mt-8 w-1/2">Log Out</Button>
-              </div>
-            </DialogPanel>
-          </Dialog>
-        </li>
-      </div>
+          <ul className="menu-items">
+            {menuItems.map((item) => {
+              return (
+                <li key={item.id}>
+                  <NavLink
+                    to={item.link}
+                    className={({ isActive }) => (isActive ? "active" : "")}
+                  >
+                    {item.icon}
+                    <span>{item.title}</span>
+                  </NavLink>
+                </li>
+              );
+            })}
+          </ul>
+
+          <div className="bottom-nav">
+            <li>
+              <button onClick={() => setOpenDialog(true)}>
+                {signout} Sign Out
+              </button>
+              <Dialog
+                open={openDialog}
+                onClose={(val) => setOpenDialog(val)}
+                static={true}
+              >
+                <DialogPanel>
+                  <h3 className="text-lg font-semibold text-tremor-content-strong dark:text-dark-tremor-content-strong">
+                    Your are about to Sign Out
+                  </h3>
+                  <p className="mt-2 leading-6 text-tremor-default text-tremor-content dark:text-dark-tremor-content">
+                    Are you sure you want to log out of the app? This action
+                    will send you back to the login page
+                  </p>
+                  <div className=" w-full flex flex-row gap-2">
+                    <Button
+                      className="mt-8 w-1/2"
+                      variant="secondary"
+                      onClick={() => setOpenDialog(false)}
+                    >
+                      Cancel
+                    </Button>
+
+                    <Button
+                      className="mt-8 w-1/2"
+                      onClick={() => signOut({ redirectUrl: "/auth/sign-in" })}
+                    >
+                      Log Out
+                    </Button>
+                  </div>
+                </DialogPanel>
+              </Dialog>
+            </li>
+          </div>
+        </>
+      ) : (
+        <div>Loading user data...</div>
+      )}
     </NavStyled>
   );
 };
