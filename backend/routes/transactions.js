@@ -8,10 +8,8 @@ const {
   getIncomes,
   deleteIncome,
 } = require("../controllers/income");
-const clerkMiddleware = require("../middleware/clerkMiddleware");
 
 const router = require("express").Router();
-router.use(clerkMiddleware);
 
 router
   .post("/add-income", addIncome)

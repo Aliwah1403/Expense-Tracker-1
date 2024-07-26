@@ -36,6 +36,8 @@ function App() {
     return <Navigate to={"/auth/sign-in"} />;
   }
 
+
+
   return (
     <AppStyled bg={bg} className="App">
       {orbMemo}

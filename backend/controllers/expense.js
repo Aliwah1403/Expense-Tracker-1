@@ -3,10 +3,8 @@ const expenseSchema = require("../models/expenseModel");
 // Method for saving expenses
 exports.addExpense = async (req, res) => {
   const { title, amount, category, description, date } = req.body;
-  const userId = req.userId;
 
   const expense = expenseSchema({
-    userId,
     title,
     amount,
     category,
@@ -37,9 +35,7 @@ exports.addExpense = async (req, res) => {
 // Method for retrieving expenses
 exports.getExpense = async (req, res) => {
   try {
-    const expenses = await expenseSchema
-      .find({ userId: req.userId })
-      .sort({ createdAt: -1 }); //making most recent entry appear first
+    const expenses = await expenseSchema.find().sort({ createdAt: -1 }); //making most recent entry appear first
     res.status(200).json(expenses);
   } catch (error) {
     res.status(500).json({ message: "Server Error" });
@@ -50,22 +46,12 @@ exports.getExpense = async (req, res) => {
 exports.deleteExpense = async (req, res) => {
   const { id } = req.params;
 
-  try {
-    const expense = await Expense.findOneAndDelete({
-      _id: id,
-      userId: req.userId,
+  expenseSchema
+    .findByIdAndDelete(id)
+    .then((expense) => {
+      res.status(200).json({ message: "Expense Deleted Successfully" });
+    })
+    .catch((err) => {
+      res.status(500).json({ message: "Server Error" });
     });
-    res.status(200).json({ message: "Expense Deleted Successfully" });
-  } catch (error) {
-    res.status(500).json({ message: "Server Error" });
-  }
-
-  //   expenseSchema
-  //     .findByIdAndDelete(id)
-  //     .then((expense) => {
-  //       res.status(200).json({ message: "Expense Deleted Successfully" });
-  //     })
-  //     .catch((err) => {
-  //       res.status(500).json({ message: "Server Error" });
-  //     });
 };
