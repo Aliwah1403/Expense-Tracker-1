@@ -10,10 +10,9 @@ import { UserButton, useUser } from "@clerk/clerk-react";
 const Navigation = ({ active, setActive }) => {
   const [openDialog, setOpenDialog] = useState(false);
 
-  // const { user } = useUser();
-  // const userName = user.username;
-  // const userEmail = user.emailAddresses;
-  // console.log(userName);
+  const { user } = useUser();
+  const userName = user.username;
+  const userEmail = user.emailAddresses;
 
   return (
     <NavStyled>
@@ -21,8 +20,10 @@ const Navigation = ({ active, setActive }) => {
         {/* <img src={avatar} alt="user-avatar" /> */}
         <UserButton />
         <div className="text">
-          <h2 className="text-lg">user</h2>
-          <p className="text-[#22226099] text-sm">user@gmail.com</p>
+          <h2 className="text-lg capitalize">{userName}</h2>
+          <p className="text-[#22226099] text-sm">
+            {userEmail.length > 0 && userEmail[0].emailAddress}
+          </p>
         </div>
       </div>
 
