@@ -12,7 +12,7 @@ dotenv.config();
 const PORT = process.env.PORT;
 
 const corsOptions = {
-  origin: "https://expense-tracker-1-frontend.vercel.app",
+  origin: "https://expense-tracker-1-frontend-2ed9zywmf.vercel.app",
   optionsSuccessStatus: 200,
 };
 
