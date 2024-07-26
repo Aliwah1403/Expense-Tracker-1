@@ -31,24 +31,32 @@ export const GlobalProvider = ({ children }) => {
 
   // adding incomes to db
   const addIncome = async (income) => {
-    const response = await axios
-      .post(`${BASE_URL}add-income`, income)
-      .catch((error) => {
-        setError(error.response.data.message);
-      });
-    getIncome();
+    try {
+      await authenticatedAxios.post("add-income", income);
+      getIncome();
+    } catch (error) {
+      setError(error.response.data.message);
+    }
   };
 
   // retrieving incomes from the db
   const getIncome = async () => {
-    const response = await axios.get(`${BASE_URL}get-incomes`);
-    setIncomes(response.data);
+    try {
+      const response = await authenticatedAxios.get("get-incomes");
+      setIncomes(response.data);
+    } catch (error) {
+      setError(error.response?.data?.message);
+    }
   };
 
   // deleting incomes from db
   const deleteIncome = async (id) => {
-    const res = await axios.delete(`${BASE_URL}delete-income/${id}`);
-    getIncome();
+    try {
+      await authenticatedAxios.delete(`delete-income/${id}`);
+      getIncome();
+    } catch (error) {
+      setError(error.response?.data?.message);
+    }
   };
 
   // getting total of all incomes added
