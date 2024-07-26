@@ -1,7 +1,21 @@
+import { useAuth } from "@clerk/clerk-react";
 import React, { useContext, useState } from "react";
 import axios from "axios";
 
 const BASE_URL = "http://localhost:5000/api/v1/";
+
+const createAuthenticatedAxios = (getToken) => {
+  const instance = axios.create({
+    baseURL: BASE_URL,
+  });
+
+  instance.interceptors.request.use(async (config) => {
+    const token = await getToken();
+    config.headers.Authorization = `Bearer ${token}`;
+    return config;
+  });
+  return instance;
+};
 
 const GlobalContext = React.createContext();
 
@@ -9,6 +23,11 @@ export const GlobalProvider = ({ children }) => {
   const [incomes, setIncomes] = useState([]);
   const [expenses, setExpenses] = useState([]);
   const [error, setError] = useState(null);
+  const { getToken } = useAuth();
+  const authenticatedAxios = React.useMemo(
+    () => createAuthenticatedAxios(getToken),
+    [getToken]
+  );
 
   // adding incomes to db
   const addIncome = async (income) => {
@@ -44,24 +63,32 @@ export const GlobalProvider = ({ children }) => {
 
   // adding expenses to db
   const addExpense = async (expense) => {
-    const response = await axios
-      .post(`${BASE_URL}add-expense`, expense)
-      .catch((error) => {
-        setError(error.response.data.message);
-      });
-    getExpense();
+    try {
+      await authenticatedAxios.post("add-expense", expense);
+      getExpense();
+    } catch (error) {
+      setError(error.response.data.message);
+    }
   };
 
   // retrieving expenses from the db
   const getExpense = async () => {
-    const response = await axios.get(`${BASE_URL}get-expenses`);
-    setExpenses(response.data);
+    try {
+      const response = await authenticatedAxios.get("get-expenses");
+      setExpenses(response.data);
+    } catch (error) {
+      setError(error.response?.data?.message);
+    }
   };
 
   // deleting expenses from db
   const deleteExpense = async (id) => {
-    const res = await axios.delete(`${BASE_URL}delete-expense/${id}`);
-    getExpense();
+    try {
+      await authenticatedAxios.delete(`delete-expense/${id}`);
+      getExpense();
+    } catch (error) {
+      setError(error.response?.data?.message);
+    }
   };
 
   // getting total of all expenses added

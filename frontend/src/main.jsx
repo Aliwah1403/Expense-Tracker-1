@@ -59,11 +59,10 @@ const router = createBrowserRouter([
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <GlobalStyle />
-    <GlobalProvider>
-      {/* <App /> */}
-      <ClerkProvider publishableKey={PUBLISHABLE_KEY}>
+    <ClerkProvider publishableKey={PUBLISHABLE_KEY}>
+      <GlobalProvider>
         <RouterProvider router={router} />
-      </ClerkProvider>
-    </GlobalProvider>
+      </GlobalProvider>
+    </ClerkProvider>
   </React.StrictMode>
 );
