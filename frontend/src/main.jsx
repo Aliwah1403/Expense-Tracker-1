@@ -13,6 +13,7 @@ import Transactions from "./Components/Transactions/Transactions.jsx";
 import Incomes from "./Components/Incomes/Incomes.jsx";
 import Expenses from "./Components/Expenses/Expenses.jsx";
 import SignUp from "./auth/sign-up/SignUp.jsx";
+import { Analytics } from "@vercel/analytics/react";
 
 const PUBLISHABLE_KEY = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY;
 
@@ -61,6 +62,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
     <GlobalStyle />
     <ClerkProvider publishableKey={PUBLISHABLE_KEY}>
       <GlobalProvider>
+        <Analytics />
         <RouterProvider router={router} />
       </GlobalProvider>
     </ClerkProvider>
