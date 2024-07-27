@@ -20,6 +20,7 @@ import Expenses from "./Components/Expenses/Expenses";
 import Transactions from "./Components/Transactions/Transactions";
 import { Button } from "@tremor/react";
 import { useUser } from "@clerk/clerk-react";
+import { Analytics } from "@vercel/analytics/react";
 
 function App() {
   const global = useGlobalContext();
@@ -30,15 +31,13 @@ function App() {
 
   const { user, isLoaded, isSignedIn } = useUser();
 
-
   if (!isSignedIn && isLoaded) {
     return <Navigate to={"/auth/sign-in"} />;
   }
 
-
-
   return (
     <AppStyled bg={bg} className="App">
+      <Analytics />
       {orbMemo}
       <MainLayout>
         <Navigation />
