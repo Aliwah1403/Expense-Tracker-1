@@ -2,7 +2,7 @@ import { useAuth } from "@clerk/clerk-react";
 import React, { useContext, useState } from "react";
 import axios from "axios";
 
-const BASE_URL = "https://expense-tracker-1-backend.onrender.com/api/v1/";
+const BASE_URL = "https://expense-tracker-1-backend.onrender.com";
 
 const createAuthenticatedAxios = (getToken) => {
   const instance = axios.create({
