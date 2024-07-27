@@ -12,7 +12,10 @@ dotenv.config();
 const PORT = process.env.PORT;
 
 const corsOptions = {
-  origin: "https://expense-tracker-1-frontend-2ed9zywmf.vercel.app",
+  origin: [
+    "https://expense-tracker-1-frontend.vercel.app",
+    "http://localhost:5173",
+  ],
   optionsSuccessStatus: 200,
 };
 
@@ -27,9 +30,7 @@ app.use(ClerkExpressRequireAuth());
 readdirSync("./routes").map((route) =>
   app.use("/", require("./routes/" + route))
 );
-// readdirSync("./routes").map((route) =>
-//   app.use("/api/v1", require("./routes/" + route))
-// );
+
 
 const server = () => {
   db();
