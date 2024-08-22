@@ -15,6 +15,7 @@ import Expenses from "./Components/Expenses/Expenses.jsx";
 import SignUp from "./auth/sign-up/SignUp.jsx";
 import { Analytics } from "@vercel/analytics/react";
 import Settings from "./Components/Settings/Settings.jsx";
+import SelectOrganization from "./auth/Organization/SelectOrganization.jsx";
 
 const PUBLISHABLE_KEY = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY;
 
@@ -51,6 +52,10 @@ const router = createBrowserRouter([
         element: <Settings />,
       },
     ],
+  },
+  {
+    path: "/select-organization",
+    element: <SelectOrganization />,
   },
   {
     path: "/auth/sign-in",

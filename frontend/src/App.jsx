@@ -19,7 +19,11 @@ import Navigation from "./Components/Navigation/Navigation";
 import Expenses from "./Components/Expenses/Expenses";
 import Transactions from "./Components/Transactions/Transactions";
 import { Button } from "@tremor/react";
-import { useUser } from "@clerk/clerk-react";
+import {
+  useUser,
+  useOrganization,
+  OrganizationSwitcher,
+} from "@clerk/clerk-react";
 import { Analytics } from "@vercel/analytics/react";
 
 function App() {
@@ -30,9 +34,14 @@ function App() {
   }, []);
 
   const { user, isLoaded, isSignedIn } = useUser();
+  const { organization } = useOrganization();
 
   if (!isSignedIn && isLoaded) {
     return <Navigate to={"/auth/sign-in"} />;
+  }
+
+  if (!organization && isLoaded) {
+    return <Navigate to={"/select-organization"} />;
   }
 
   return (
@@ -42,20 +51,9 @@ function App() {
       <MainLayout>
         <Navigation />
         <main>
+          <OrganizationSwitcher />
           <Outlet />
         </main>
-        {/* <BrowserRouter>
-          <Navigation />
-          <main>
-            <Routes>
-              <Route path="/dashboard" element={<Dashboard />} />
-              <Route path="/transactions" element={<Transactions />} />
-              <Route path="/incomes" element={<Incomes />} />
-              <Route path="/expenses" element={<Expenses />} />
-              <Route path="/" element={<Dashboard />} />
-            </Routes>
-          </main>
-        </BrowserRouter> */}
       </MainLayout>
     </AppStyled>
   );
