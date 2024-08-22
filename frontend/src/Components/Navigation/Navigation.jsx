@@ -22,6 +22,8 @@ const Navigation = ({ active, setActive }) => {
         <>
           <div className="user-con">
             <UserButton
+              userProfileMode="navigation"
+              userProfileUrl="/settings"
               appearance={{
                 elements: {
                   userButtonBox: "h-10",
