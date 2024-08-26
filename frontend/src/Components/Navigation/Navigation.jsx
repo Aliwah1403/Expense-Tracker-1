@@ -5,16 +5,22 @@ import { menuItems } from "../../utils/menuItems";
 import { signout } from "../../utils/Icons";
 import { Dialog, DialogPanel, Button } from "@tremor/react";
 import { NavLink } from "react-router-dom";
-import { UserButton, useUser, useClerk } from "@clerk/clerk-react";
+import {
+  UserButton,
+  useUser,
+  useClerk,
+  useOrganization,
+} from "@clerk/clerk-react";
 
 const Navigation = ({ active, setActive }) => {
   const [openDialog, setOpenDialog] = useState(false);
 
   const { user, isLoaded } = useUser();
+  const { organization } = useOrganization();
+  const { signOut } = useClerk();
+
   const userName = user?.username || "User";
   const userEmail = user?.emailAddresses;
-
-  const { signOut } = useClerk();
 
   return (
     <NavStyled>
@@ -22,6 +28,8 @@ const Navigation = ({ active, setActive }) => {
         <>
           <div className="user-con">
             <UserButton
+              userProfileMode="navigation"
+              userProfileUrl="/settings"
               appearance={{
                 elements: {
                   userButtonBox: "h-10",
@@ -32,9 +40,10 @@ const Navigation = ({ active, setActive }) => {
             <div className="text">
               <h2 className="text-lg capitalize">{userName}</h2>
               <p className="text-[#22226099] text-sm">
-                {userEmail && userEmail.length > 0
+                {organization ? organization.name : "No organization selected"}
+                {/* {userEmail && userEmail.length > 0
                   ? userEmail[0].emailAddress
-                  : "No email available"}
+                  : "No email available"} */}
               </p>
             </div>
           </div>
